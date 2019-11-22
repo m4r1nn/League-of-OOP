@@ -1,6 +1,6 @@
 package players.factory;
 
-import players.Hero;
+import players.types.Hero;
 import players.types.Knight;
 import players.types.Pyromancer;
 import players.types.Rogue;
@@ -15,15 +15,15 @@ public class HeroFactory {
         }
         return instance;
     }
-    public Hero createHero(HeroTypes type) {
+    public Hero createHero(char type) {
         switch (type) {
-            case PYROMANCER:
+            case 'P':
                 return new Pyromancer();
-            case KNIGHT:
+            case 'K':
                 return new Knight();
-            case WIZARD:
+            case 'W':
                 return new Wizard();
-            case ROGUE:
+            case 'R':
                 return new Rogue();
             default:
                 throw new IllegalArgumentException();

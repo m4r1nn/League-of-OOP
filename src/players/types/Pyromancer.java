@@ -1,48 +1,18 @@
 package players.types;
 
-import players.Hero;
-import players.HeroDamage;
+import players.abilities.HeroDamage;
+import players.factory.HeroTypes;
 
 public class Pyromancer extends Hero {
-
+    public Pyromancer() {
+        super();
+        this.type = HeroTypes.PYROMANCER;
+        this.HP = this.defaultHP = 500;
+        this.bonusHPperLevel = 50;
+    }
     @Override
     public void takeDamage(HeroDamage enemy) {
         enemy.launchFirstAttack(this);
         enemy.launchSecondAttack(this);
-    }
-
-    private class PyromancerDamage implements HeroDamage {
-        @Override
-        public void launchFirstAttack(Pyromancer opponent) {
-
-        }
-        @Override
-        public void launchSecondAttack(Pyromancer opponent) {
-
-        }
-        @Override
-        public void launchFirstAttack(Knight opponent) {
-
-        }
-        @Override
-        public void launchSecondAttack(Knight opponent) {
-
-        }
-        @Override
-        public void launchFirstAttack(Wizard opponent) {
-
-        }
-        @Override
-        public void launchSecondAttack(Wizard opponent) {
-
-        }
-        @Override
-        public void launchFirstAttack(Rogue opponent) {
-
-        }
-        @Override
-        public void launchSecondAttack(Rogue opponent) {
-
-        }
     }
 }

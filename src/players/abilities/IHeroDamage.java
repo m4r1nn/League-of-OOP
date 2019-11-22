@@ -1,11 +1,11 @@
-package players;
+package players.abilities;
 
 import players.types.Knight;
 import players.types.Pyromancer;
 import players.types.Rogue;
 import players.types.Wizard;
 
-public interface HeroDamage {
+public interface IHeroDamage {
     public void launchFirstAttack(Pyromancer opponent);
     public void launchSecondAttack(Pyromancer opponent);
     public void launchFirstAttack(Knight opponent);
