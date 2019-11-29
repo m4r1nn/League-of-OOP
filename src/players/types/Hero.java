@@ -10,7 +10,14 @@ public abstract class Hero implements IHero {
     protected Coords coords;
     protected HeroTypes type;
     protected int defaultHP;
+    public int maxHP;
     protected int bonusHPperLevel;
+    public int damageToTake;
+    public int damageToTakeWithoutRaceModif;
+    public int damageOverTime = 0;
+    public int roundsOfDamageOverTime = 0;
+    public boolean stunned = false;
+    public int roundsOfStun = 0;
     public int getHP() {
         return this.HP;
     }
@@ -40,7 +47,7 @@ public abstract class Hero implements IHero {
         this.level = 0;
     }
     public void restoreHP() {
-        this.HP = this.defaultHP + this.bonusHPperLevel * this.level;
+        this.maxHP = this.HP = this.defaultHP + this.bonusHPperLevel * this.level;
     }
     public void growXP(int opponentLevel) {
         boolean hasGrown = false;
@@ -54,6 +61,10 @@ public abstract class Hero implements IHero {
         if (hasGrown) {
             this.restoreHP();
         }
+    }
+    @Override
+    public void move() {
+
     }
     @Override
     public String toString() {

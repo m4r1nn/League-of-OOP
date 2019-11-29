@@ -1,12 +1,17 @@
 package players.abilities;
 
+import common.GameMap;
 import players.types.Hero;
 
 public abstract class HeroDamage implements IHeroDamage {
-    protected int heroLevel;
-    public abstract int calculateFirstBaseDamage();
-    public abstract int calculateSecondBaseDamage();
-    public void getHeroLevel(Hero hero) {
-        this.heroLevel = hero.getLevel();
+    protected Hero hero;
+    protected GameMap gameMap;
+    public HeroDamage(Hero hero) {
+        this.hero = hero;
+        this.gameMap = GameMap.getInstance();
+    }
+    public abstract void setDamageWithoutRaceModif(Hero hero);
+    public int getHeroLevel() {
+        return this.hero.getLevel();
     }
 }

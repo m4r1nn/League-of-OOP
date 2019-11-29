@@ -1,9 +1,7 @@
 package common;
 
-import main.GameLogic;
 import players.types.Hero;
 
-import java.io.File;
 import java.util.ArrayList;
 
 public class GameMap {
