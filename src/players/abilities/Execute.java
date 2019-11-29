@@ -10,15 +10,19 @@ public class Execute extends HeroDamage {
     }
     @Override
     public void setDamageWithoutRaceModif(Hero hero) {
-        hero.damageToTakeWithoutRaceModif = Math.round(200 + 0.3f * this.getHeroLevel());
+        hero.damageToTakeWithoutRaceModif = 200 + 30 * this.getHeroLevel();
         if (this.gameMap.getField(this.hero) == Fields.LAND) {
             hero.damageToTakeWithoutRaceModif = Math.round(hero.damageToTakeWithoutRaceModif * 1.15f);
         }
-        if (this.getHeroLevel() <= 40) {
-            this.possibleDamage = Math.round(0.2f * hero.maxHP * 0.01f * this.getHeroLevel());
+        hero.totalDamageToTake = hero.damageToTakeWithoutRaceModif;
+
+        float percent;
+        if (this.getHeroLevel() <= 20) {
+            percent = 0.2f + 0.01f * this.getHeroLevel();
         } else {
-            this.possibleDamage = Math.round(0.2f * hero.maxHP * 0.01f * 40);
+            percent = 0.2f + 0.01f * 20;
         }
+        this.possibleDamage = Math.round(hero.maxHP + percent);
     }
     @Override
     public void launchAttack(Pyromancer opponent) {

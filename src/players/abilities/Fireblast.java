@@ -9,10 +9,11 @@ public class Fireblast extends HeroDamage {
     }
     @Override
     public void setDamageWithoutRaceModif(Hero hero) {
-        hero.damageToTakeWithoutRaceModif = Math.round(350 + 0.5f * this.getHeroLevel());
+        hero.damageToTakeWithoutRaceModif = 350 + 50 * this.getHeroLevel();
         if (this.gameMap.getField(this.hero) == Fields.VOLCANIC) {
             hero.damageToTakeWithoutRaceModif = Math.round(hero.damageToTakeWithoutRaceModif * 1.25f);
         }
+        hero.totalDamageToTake = hero.damageToTakeWithoutRaceModif;
     }
     @Override
     public void launchAttack(Pyromancer opponent) {

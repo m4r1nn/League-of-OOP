@@ -9,10 +9,12 @@ public class Slam extends HeroDamage {
     }
     @Override
     public void setDamageWithoutRaceModif(Hero hero) {
-        hero.damageToTakeWithoutRaceModif = Math.round(100 + 0.4f * this.getHeroLevel());
+        hero.damageToTakeWithoutRaceModif = 100 + 40 * this.getHeroLevel();
         if (this.gameMap.getField(this.hero) == Fields.LAND) {
             hero.damageToTakeWithoutRaceModif = Math.round(hero.damageToTakeWithoutRaceModif * 1.15f);
         }
+        hero.totalDamageToTake += hero.damageToTakeWithoutRaceModif;
+
         hero.stunned = true;
         hero.roundsOfStun = 1;
     }

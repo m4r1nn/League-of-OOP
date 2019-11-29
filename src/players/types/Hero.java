@@ -14,6 +14,7 @@ public abstract class Hero implements IHero {
     protected int bonusHPperLevel;
     public int damageToTake;
     public int damageToTakeWithoutRaceModif;
+    public int totalDamageToTake;
     public int damageOverTime = 0;
     public int roundsOfDamageOverTime = 0;
     public boolean stunned = false;
