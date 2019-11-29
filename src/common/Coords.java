@@ -23,4 +23,18 @@ public class Coords {
     public String toString() {
         return "(" + this.x + ", " + this.y + ")";
     }
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof Coords)) {
+            return false;
+        }
+        Coords temp = (Coords)other;
+        if (this.x == temp.x && this.y == temp.y) {
+            return true;
+        }
+        return false;
+    }
 }

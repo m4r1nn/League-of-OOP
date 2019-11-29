@@ -1,6 +1,7 @@
 package players.types;
 
 import common.Coords;
+import players.abilities.HeroDamage;
 import players.factory.HeroTypes;
 
 public abstract class Hero implements IHero {
@@ -8,7 +9,7 @@ public abstract class Hero implements IHero {
     protected int XP;
     protected int level;
     protected Coords coords;
-    protected HeroTypes type;
+    public HeroTypes type;
     protected int defaultHP;
     public int maxHP;
     protected int bonusHPperLevel;
@@ -19,6 +20,10 @@ public abstract class Hero implements IHero {
     public int roundsOfDamageOverTime = 0;
     public boolean stunned = false;
     public int roundsOfStun = 0;
+
+    public HeroDamage ability1;
+    public HeroDamage ability2;
+
     public int getHP() {
         return this.HP;
     }

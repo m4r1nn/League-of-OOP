@@ -17,6 +17,8 @@ public class Slam extends HeroDamage {
 
         hero.stunned = true;
         hero.roundsOfStun = 1;
+        hero.damageOverTime = 0;
+        hero.roundsOfDamageOverTime = 0;
     }
     @Override
     public void launchAttack(Pyromancer opponent) {

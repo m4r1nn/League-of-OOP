@@ -12,6 +12,8 @@ public class Ignite extends HeroDamage {
         hero.damageToTakeWithoutRaceModif = 150 + 20 * this.getHeroLevel();
         hero.damageOverTime = 50 + 30 * this.getHeroLevel();
         hero.roundsOfDamageOverTime = 2;
+        hero.stunned = false;
+        hero.roundsOfStun = 0;
 
         if (this.gameMap.getField(this.hero) == Fields.VOLCANIC) {
             hero.damageToTakeWithoutRaceModif = Math.round(hero.damageToTakeWithoutRaceModif * 1.25f);
