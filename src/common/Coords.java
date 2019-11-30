@@ -1,27 +1,27 @@
 package common;
 
 public class Coords {
-    private int x;
-    private int y;
-    public Coords(int x, int y) {
-        this.x = x;
-        this.y = y;
+    private int lin;
+    private int col;
+    public Coords(int lin, int col) {
+        this.lin = lin;
+        this.col = col;
     }
-    public int getX() {
-        return this.x;
+    public int getLin() {
+        return this.lin;
     }
-    public void setX(int x) {
-        this.x = x;
+    public void setLin(int lin) {
+        this.lin = lin;
     }
-    public int getY() {
-        return this.y;
+    public int getCol() {
+        return this.col;
     }
-    public void setY(int y) {
-        this.y = y;
+    public void setCol(int col) {
+        this.col = col;
     }
     @Override
     public String toString() {
-        return "(" + this.x + ", " + this.y + ")";
+        return "(" + this.lin + ", " + this.col + ")";
     }
     @Override
     public boolean equals(Object other) {
@@ -32,7 +32,7 @@ public class Coords {
             return false;
         }
         Coords temp = (Coords)other;
-        if (this.x == temp.x && this.y == temp.y) {
+        if (this.lin == temp.lin && this.col == temp.col) {
             return true;
         }
         return false;

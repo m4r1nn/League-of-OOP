@@ -11,9 +11,9 @@ public class Slam extends HeroDamage {
     public void setDamageWithoutRaceModif(Hero hero) {
         hero.damageToTakeWithoutRaceModif = 100 + 40 * this.getHeroLevel();
         if (this.gameMap.getField(this.hero) == Fields.LAND) {
-            hero.damageToTakeWithoutRaceModif = Math.round(hero.damageToTakeWithoutRaceModif * 1.15f);
+            hero.damageToTakeWithoutRaceModif = hero.damageToTakeWithoutRaceModif * 1.15f;
         }
-        hero.totalDamageToTake += hero.damageToTakeWithoutRaceModif;
+        hero.totalDamageToTake += Math.round(hero.damageToTakeWithoutRaceModif);
 
         hero.stunned = true;
         hero.roundsOfStun = 1;
@@ -39,5 +39,9 @@ public class Slam extends HeroDamage {
     public void launchAttack(Rogue opponent) {
         this.setDamageWithoutRaceModif(opponent);
         opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif * 0.8f);
+    }
+    @Override
+    public String toString() {
+        return "Slam";
     }
 }

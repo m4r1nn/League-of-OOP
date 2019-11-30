@@ -15,11 +15,11 @@ public class Deflect extends HeroDamage {
         } else {
             percent = 0.35f + 0.02f * 17;
         }
-        hero.damageToTakeWithoutRaceModif = Math.round(this.hero.totalDamageToTake * percent);
+        hero.damageToTakeWithoutRaceModif = this.hero.totalDamageToTake * percent;
         if (this.gameMap.getField(this.hero) == Fields.DESERT) {
-            hero.damageToTakeWithoutRaceModif = Math.round(hero.damageToTakeWithoutRaceModif * 1.1f);
+            hero.damageToTakeWithoutRaceModif = hero.damageToTakeWithoutRaceModif * 1.1f;
         }
-        hero.totalDamageToTake += hero.damageToTakeWithoutRaceModif;
+        hero.totalDamageToTake += Math.round(hero.damageToTakeWithoutRaceModif);
     }
     @Override
     public void launchAttack(Pyromancer opponent) {
@@ -40,5 +40,9 @@ public class Deflect extends HeroDamage {
     public void launchAttack(Rogue opponent) {
         this.setDamageWithoutRaceModif(opponent);
         opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif * 1.2f);
+    }
+    @Override
+    public String toString() {
+        return "Deflect";
     }
 }

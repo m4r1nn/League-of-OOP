@@ -14,7 +14,7 @@ public abstract class Hero implements IHero {
     public int maxHP;
     protected int bonusHPperLevel;
     public int damageToTake;
-    public int damageToTakeWithoutRaceModif;
+    public float damageToTakeWithoutRaceModif;
     public int totalDamageToTake;
     public int damageOverTime = 0;
     public int roundsOfDamageOverTime = 0;
@@ -74,6 +74,29 @@ public abstract class Hero implements IHero {
     }
     @Override
     public String toString() {
-        return this.type.toString() + " " + this.coords.toString();
+        char typeChar;
+        switch (this.type) {
+            case PYROMANCER:
+                typeChar = 'P';
+                break;
+            case KNIGHT:
+                typeChar = 'K';
+                break;
+            case WIZARD:
+                typeChar = 'W';
+                break;
+            case ROGUE:
+                typeChar = 'R';
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
+        if (this.getHP() <= 0) {
+            String lineToPrint = "" + typeChar + " dead";
+            return  lineToPrint;
+        }
+        String lineToPrint = "" + typeChar + " " + this.getLevel() + " " + this.getXP() + " " + this.getHP() + " "
+                + this.getCoords().getLin() + " " + this.getCoords().getCol();
+        return lineToPrint;
     }
 }

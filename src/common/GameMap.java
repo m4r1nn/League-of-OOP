@@ -41,7 +41,7 @@ public class GameMap {
     }
     public Fields getField(Hero hero) {
         Coords coords = hero.getCoords();
-        return this.table.get(coords.getX()).get(coords.getY());
+        return this.table.get(coords.getLin()).get(coords.getCol());
     }
     @Override
     public String toString() {

@@ -11,9 +11,9 @@ public class Fireblast extends HeroDamage {
     public void setDamageWithoutRaceModif(Hero hero) {
         hero.damageToTakeWithoutRaceModif = 350 + 50 * this.getHeroLevel();
         if (this.gameMap.getField(this.hero) == Fields.VOLCANIC) {
-            hero.damageToTakeWithoutRaceModif = Math.round(hero.damageToTakeWithoutRaceModif * 1.25f);
+            hero.damageToTakeWithoutRaceModif = hero.damageToTakeWithoutRaceModif * 1.25f;
         }
-        hero.totalDamageToTake = hero.damageToTakeWithoutRaceModif;
+        hero.totalDamageToTake = Math.round(hero.damageToTakeWithoutRaceModif);
     }
     @Override
     public void launchAttack(Pyromancer opponent) {
@@ -34,5 +34,9 @@ public class Fireblast extends HeroDamage {
     public void launchAttack(Rogue opponent) {
         this.setDamageWithoutRaceModif(opponent);
         opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif * 0.8f);
+    }
+    @Override
+    public String toString() {
+        return "Fireblast";
     }
 }

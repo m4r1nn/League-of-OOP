@@ -16,10 +16,10 @@ public class Ignite extends HeroDamage {
         hero.roundsOfStun = 0;
 
         if (this.gameMap.getField(this.hero) == Fields.VOLCANIC) {
-            hero.damageToTakeWithoutRaceModif = Math.round(hero.damageToTakeWithoutRaceModif * 1.25f);
+            hero.damageToTakeWithoutRaceModif = hero.damageToTakeWithoutRaceModif * 1.25f;
             hero.damageOverTime = Math.round(hero.damageOverTime * 1.25f);
         }
-        hero.totalDamageToTake += hero.damageToTakeWithoutRaceModif;
+        hero.totalDamageToTake += Math.round(hero.damageToTakeWithoutRaceModif);
     }
     @Override
     public void launchAttack(Pyromancer opponent) {
@@ -44,5 +44,9 @@ public class Ignite extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
         opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif * 0.8f);
         opponent.damageOverTime = Math.round(opponent.damageOverTime * 0.8f);
+    }
+    @Override
+    public String toString() {
+        return "Ignite";
     }
 }

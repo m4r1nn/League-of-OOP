@@ -6,6 +6,8 @@ import players.factory.HeroTypes;
 import players.types.Hero;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -40,27 +42,27 @@ public class GameLogic {
                 continue;
             }
             Coords coords = hero.getCoords();
-            int x = coords.getX();
-            int y = coords.getY();
+            int lin = coords.getLin();
+            int col = coords.getCol();
             switch (directions[i]) {
                 case 'U':
-                    y--;
+                    lin--;
                     break;
                 case 'D':
-                    y++;
+                    lin++;
                     break;
                 case 'L':
-                    x--;
+                    col--;
                     break;
                 case 'R':
-                    x++;
+                    col++;
                     break;
                 case '_':
                     break;
                 default:
                     throw new IllegalArgumentException();
             }
-            hero.setCoords(new Coords(x, y));
+            hero.setCoords(new Coords(lin, col));
             i++;
         }
     }
@@ -81,7 +83,7 @@ public class GameLogic {
         hero1.takeDamage(hero2.ability1, hero2.ability2);
         if (hero1.getHP() > 0 && hero2.getHP() <= 0) {
             hero1.growXP(hero2.getLevel());
-        } else if (hero1.getHP() <= 0 && hero1.getHP() > 0) {
+        } else if (hero1.getHP() <= 0 && hero2.getHP() > 0) {
             hero2.growXP(hero1.getLevel());
         }
     }
@@ -97,41 +99,36 @@ public class GameLogic {
         }
     }
     public void displayHeroes() {
-        for (Hero hero : players) {
-            char typeChar;
-            switch (hero.type) {
-                case PYROMANCER:
-                    typeChar = 'P';
-                    break;
-                case KNIGHT:
-                    typeChar = 'K';
-                    break;
-                case WIZARD:
-                    typeChar = 'W';
-                    break;
-                case ROGUE:
-                    typeChar = 'R';
-                    break;
-                default:
-                    throw new IllegalArgumentException();
+        try {
+            FileWriter fw = new FileWriter(this.outputPath);
+            BufferedWriter bfw = new BufferedWriter(fw);
+            for (Hero hero : players) {
+                System.out.println(hero.toString());
+                bfw.write(hero.toString() + "\n");
             }
-            if (hero.getHP() <= 0) {
-                System.out.println(typeChar + " dead");
-                continue;
-            }
-            System.out.println(typeChar + " " + hero.getLevel() + " " + hero.getXP() + " " + hero.getHP() + " "
-                    + hero.getCoords().getX() + " " + hero.getCoords().getY());
+            bfw.close();
+            fw.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
     }
     public void runRounds() {
         try {
             String line;
+//            for (Hero hero : players) {
+//                System.out.println(hero.toString());
+//            }
             for (int i = 0; i < this.roundsNumber; i++) {
+//                System.out.println("Round: " + i);
                 line = bfr.readLine();
                 char[] directions = line.toCharArray();
                 this.movePlayers(directions);
                 this.applyOvertimeDamage();
                 this.letHeroesFight();
+//                for (Hero hero : players) {
+//                    System.out.println(hero.toString());
+//                }
+//                System.out.println("-----------END ROUND--------");
             }
             this.displayHeroes();
         } catch (IOException e) {

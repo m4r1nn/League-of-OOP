@@ -11,15 +11,15 @@ public class Backstab extends HeroDamage {
     @Override
     public void setDamageWithoutRaceModif(Hero hero) {
         if (this.hits % 3 == 0 && this.gameMap.getField(this.hero) == Fields.WOODS) {
-            hero.damageToTakeWithoutRaceModif = Math.round((200 + 20 * this.getHeroLevel()) * 1.5f);
+            hero.damageToTakeWithoutRaceModif = (200 + 20 * this.getHeroLevel()) * 1.5f;
         } else {
             hero.damageToTakeWithoutRaceModif = 200 + 20 * this.getHeroLevel();
         }
 
         if (this.gameMap.getField(this.hero) == Fields.WOODS) {
-            hero.damageToTakeWithoutRaceModif = Math.round(hero.damageToTakeWithoutRaceModif * 1.15f);
+            hero.damageToTakeWithoutRaceModif = hero.damageToTakeWithoutRaceModif * 1.15f;
         }
-        hero.totalDamageToTake = hero.damageToTakeWithoutRaceModif;
+        hero.totalDamageToTake = Math.round(hero.damageToTakeWithoutRaceModif);
 
         this.hits++;
     }
@@ -42,5 +42,9 @@ public class Backstab extends HeroDamage {
     public void launchAttack(Rogue opponent) {
         this.setDamageWithoutRaceModif(opponent);
         opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif * 1.2f);
+    }
+    @Override
+    public String toString() {
+        return "Backstab";
     }
 }

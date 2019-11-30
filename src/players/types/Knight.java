@@ -10,7 +10,7 @@ public class Knight extends Hero {
         this.maxHP = this.HP = this.defaultHP = 900;
         this.bonusHPperLevel = 80;
         this.ability1 = new Execute(this);
-        this.ability1 = new Slam(this);
+        this.ability2 = new Slam(this);
     }
     @Override
     public void takeDamage(HeroDamage enemy1, HeroDamage enemy2) {

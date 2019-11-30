@@ -13,31 +13,36 @@ public class Paralysis extends HeroDamage {
         hero.roundsOfDamageOverTime = hero.roundsOfStun = 3;
         hero.stunned = true;
         if (this.gameMap.getField(this.hero) == Fields.WOODS) {
-            hero.damageToTakeWithoutRaceModif = hero.damageOverTime = Math.round(hero.damageToTakeWithoutRaceModif * 1.15f);
+            hero.damageToTakeWithoutRaceModif = hero.damageToTakeWithoutRaceModif * 1.15f;
+            hero.damageOverTime = Math.round(hero.damageToTakeWithoutRaceModif * 1.15f);
             hero.roundsOfDamageOverTime += 3;
             hero.roundsOfStun += 3;
         }
 
-        hero.totalDamageToTake += hero.damageToTakeWithoutRaceModif;
+        hero.totalDamageToTake += Math.round(hero.damageToTakeWithoutRaceModif);
     }
     @Override
     public void launchAttack(Pyromancer opponent) {
         this.setDamageWithoutRaceModif(opponent);
-        opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif * 1.2f);
+        opponent.damageToTake = opponent.damageOverTime = Math.round(opponent.damageToTakeWithoutRaceModif * 1.2f);
     }
     @Override
     public void launchAttack(Knight opponent) {
         this.setDamageWithoutRaceModif(opponent);
-        opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif * 0.8f);
+        opponent.damageToTake = opponent.damageOverTime = Math.round(opponent.damageToTakeWithoutRaceModif * 0.8f);
     }
     @Override
     public void launchAttack(Wizard opponent) {
         this.setDamageWithoutRaceModif(opponent);
-        opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif * 1.25f);
+        opponent.damageToTake = opponent.damageOverTime = Math.round(opponent.damageToTakeWithoutRaceModif * 1.25f);
     }
     @Override
     public void launchAttack(Rogue opponent) {
         this.setDamageWithoutRaceModif(opponent);
-        opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif * 0.9f);
+        opponent.damageToTake = opponent.damageOverTime = Math.round(opponent.damageToTakeWithoutRaceModif * 0.9f);
+    }
+    @Override
+    public String toString() {
+        return "Paralysis";
     }
 }

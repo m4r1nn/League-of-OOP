@@ -12,9 +12,9 @@ public class Execute extends HeroDamage {
     public void setDamageWithoutRaceModif(Hero hero) {
         hero.damageToTakeWithoutRaceModif = 200 + 30 * this.getHeroLevel();
         if (this.gameMap.getField(this.hero) == Fields.LAND) {
-            hero.damageToTakeWithoutRaceModif = Math.round(hero.damageToTakeWithoutRaceModif * 1.15f);
+            hero.damageToTakeWithoutRaceModif = hero.damageToTakeWithoutRaceModif * 1.15f;
         }
-        hero.totalDamageToTake = hero.damageToTakeWithoutRaceModif;
+        hero.totalDamageToTake = Math.round(hero.damageToTakeWithoutRaceModif);
 
         float percent;
         if (this.getHeroLevel() <= 20) {
@@ -22,7 +22,7 @@ public class Execute extends HeroDamage {
         } else {
             percent = 0.2f + 0.01f * 20;
         }
-        this.possibleDamage = Math.round(hero.maxHP + percent);
+        this.possibleDamage = Math.round(hero.maxHP * percent);
     }
     @Override
     public void launchAttack(Pyromancer opponent) {
@@ -35,7 +35,7 @@ public class Execute extends HeroDamage {
     @Override
     public void launchAttack(Knight opponent) {
         this.setDamageWithoutRaceModif(opponent);
-        // modifier = 0
+        opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif);
         if (this.possibleDamage >= opponent.getHP()) {
             opponent.damageToTake = this.possibleDamage;
         }
@@ -55,5 +55,9 @@ public class Execute extends HeroDamage {
         if (this.possibleDamage >= opponent.getHP()) {
             opponent.damageToTake = this.possibleDamage;
         }
+    }
+    @Override
+    public String toString() {
+        return "Execute";
     }
 }
