@@ -1,48 +1,101 @@
 package players.abilities;
 
 import common.Fields;
-import players.types.*;
+import players.constants.RogueConstants;
+import players.types.Hero;
+import players.types.Pyromancer;
+import players.types.Knight;
+import players.types.Wizard;
+import players.types.Rogue;
 
 public class Paralysis extends HeroDamage {
-    public Paralysis(Hero hero) {
+    // constructor
+    public Paralysis(final Hero hero) {
         super(hero);
     }
+
     @Override
-    public void setDamageWithoutRaceModif(Hero hero) {
-        hero.damageToTakeWithoutRaceModif = hero.damageOverTime = 40 + 10 * this.getHeroLevel();
-        hero.roundsOfDamageOverTime = hero.roundsOfStun = 3;
-        hero.stunned = true;
-        if (this.gameMap.getField(this.hero) == Fields.WOODS) {
-            hero.damageToTakeWithoutRaceModif = hero.damageToTakeWithoutRaceModif * 1.15f;
-            hero.damageOverTime = Math.round(hero.damageToTakeWithoutRaceModif * 1.15f);
-            hero.roundsOfDamageOverTime += 3;
-            hero.roundsOfStun += 3;
+    public final void setDamageWithoutRaceModif(final Hero hero) {
+        // set damage
+        hero.setDamageToTakeWithoutRaceModif(RogueConstants.PARALYSIS_BASIC_DAMAGE
+                + RogueConstants.BONUS_PARALYSIS_PER_LEVEL * this.getHeroLevel());
+
+        // set overtime damage
+        hero.setDamageOverTime(RogueConstants.PARALYSIS_BASIC_DAMAGE
+                + RogueConstants.BONUS_PARALYSIS_PER_LEVEL * this.getHeroLevel());
+
+        // stun the opponent
+        hero.setStunned(true);
+
+        // set number of rounds for overtime damage and stun
+        hero.setRoundsOfDamageOverTime(RogueConstants.ROUNDS_NUMBER_OF_PARALYSE);
+        hero.setRoundsOfStun(RogueConstants.ROUNDS_NUMBER_OF_PARALYSE);
+
+        // apply land modifier if possible
+        if (this.getGameMap().getField(this.getHero()) == Fields.WOODS) {
+            hero.setDamageToTakeWithoutRaceModif(hero.getDamageToTakeWithoutRaceModif()
+                    * RogueConstants.LAND_MODIF);
+            hero.setDamageOverTime(Math.round(hero.getDamageToTakeWithoutRaceModif()
+                    * RogueConstants.LAND_MODIF));
+            hero.setRoundsOfDamageOverTime(hero.getRoundsOfDamageOverTime()
+                    + RogueConstants.ROUNDS_NUMBER_OF_PARALYSE);
+            hero.setRoundsOfStun(hero.getRoundsOfStun()
+                    + RogueConstants.ROUNDS_NUMBER_OF_PARALYSE);
         }
 
-        hero.totalDamageToTake += Math.round(hero.damageToTakeWithoutRaceModif);
+        // for deflect ability
+        hero.setTotalDamageToTake(hero.getTotalDamageToTake()
+                + Math.round(hero.getDamageToTakeWithoutRaceModif()));
     }
+
+    // visitor pattern implementation
     @Override
-    public void launchAttack(Pyromancer opponent) {
+    public final void launchAttack(final Pyromancer opponent) {
         this.setDamageWithoutRaceModif(opponent);
-        opponent.damageToTake = opponent.damageOverTime = Math.round(opponent.damageToTakeWithoutRaceModif * 1.2f);
+
+        // apply race modifier
+        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
+                * RogueConstants.PARALYSIS_PYROMANCER_MODIF));
+        opponent.setDamageOverTime(Math.round(opponent.getDamageToTakeWithoutRaceModif()
+                * RogueConstants.PARALYSIS_PYROMANCER_MODIF));
     }
+
     @Override
-    public void launchAttack(Knight opponent) {
+    public final void launchAttack(final Knight opponent) {
         this.setDamageWithoutRaceModif(opponent);
-        opponent.damageToTake = opponent.damageOverTime = Math.round(opponent.damageToTakeWithoutRaceModif * 0.8f);
+
+        // apply race modifier
+        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
+                * RogueConstants.PARALYSIS_KNIGHT_MODIF));
+        opponent.setDamageOverTime(Math.round(opponent.getDamageToTakeWithoutRaceModif()
+                * RogueConstants.PARALYSIS_KNIGHT_MODIF));
     }
+
     @Override
-    public void launchAttack(Wizard opponent) {
+    public final void launchAttack(final Wizard opponent) {
         this.setDamageWithoutRaceModif(opponent);
-        opponent.damageToTake = opponent.damageOverTime = Math.round(opponent.damageToTakeWithoutRaceModif * 1.25f);
+
+        // apply race modifier
+        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
+                * RogueConstants.PARALYSIS_WIZARD_MODIF));
+        opponent.setDamageOverTime(Math.round(opponent.getDamageToTakeWithoutRaceModif()
+                * RogueConstants.PARALYSIS_WIZARD_MODIF));
     }
+
     @Override
-    public void launchAttack(Rogue opponent) {
+    public final void launchAttack(final Rogue opponent) {
         this.setDamageWithoutRaceModif(opponent);
-        opponent.damageToTake = opponent.damageOverTime = Math.round(opponent.damageToTakeWithoutRaceModif * 0.9f);
+
+        // apply race modifier
+        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
+                * RogueConstants.PARALYSIS_ROGUE_MODIF));
+        opponent.setDamageOverTime(Math.round(opponent.getDamageToTakeWithoutRaceModif()
+                * RogueConstants.PARALYSIS_ROGUE_MODIF));
     }
+
     @Override
-    public String toString() {
+    // used for debuggings
+    public final String toString() {
         return "Paralysis";
     }
 }

@@ -1,50 +1,88 @@
 package players.abilities;
 
 import common.Fields;
-import players.types.*;
+import players.constants.RogueConstants;
+import players.types.Hero;
+import players.types.Pyromancer;
+import players.types.Knight;
+import players.types.Wizard;
+import players.types.Rogue;
 
 public class Backstab extends HeroDamage {
+    // hits counter
     private int hits = 0;
-    public Backstab(Hero hero) {
+
+    // constructor
+    public Backstab(final Hero hero) {
         super(hero);
     }
+
     @Override
-    public void setDamageWithoutRaceModif(Hero hero) {
-        if (this.hits % 3 == 0 && this.gameMap.getField(this.hero) == Fields.WOODS) {
-            hero.damageToTakeWithoutRaceModif = (200 + 20 * this.getHeroLevel()) * 1.5f;
+    public final void setDamageWithoutRaceModif(final Hero hero) {
+        // set the damage and apply critical hit if possible
+        if (this.hits % RogueConstants.ROUNDS_NUMBER_FOR_CRITICAL == 0
+                && this.getGameMap().getField(this.getHero()) == Fields.WOODS) {
+            hero.setDamageToTakeWithoutRaceModif((RogueConstants.BACKSTAB_BASE_DAMAGE
+                    + RogueConstants.BONUS_BACKSTAB_PER_LEVEL * this.getHeroLevel())
+                    * RogueConstants.CRITICAL_MODIF);
         } else {
-            hero.damageToTakeWithoutRaceModif = 200 + 20 * this.getHeroLevel();
+            hero.setDamageToTakeWithoutRaceModif(RogueConstants.BACKSTAB_BASE_DAMAGE
+                    + RogueConstants.BONUS_BACKSTAB_PER_LEVEL * this.getHeroLevel());
         }
 
-        if (this.gameMap.getField(this.hero) == Fields.WOODS) {
-            hero.damageToTakeWithoutRaceModif = hero.damageToTakeWithoutRaceModif * 1.15f;
+        // apply land modifier if possible
+        if (this.getGameMap().getField(this.getHero()) == Fields.WOODS) {
+            hero.setDamageToTakeWithoutRaceModif(hero.getDamageToTakeWithoutRaceModif()
+                    * RogueConstants.LAND_MODIF);
         }
-        hero.totalDamageToTake = Math.round(hero.damageToTakeWithoutRaceModif);
 
+        // for deflect ability
+        hero.setTotalDamageToTake(Math.round(hero.getDamageToTakeWithoutRaceModif()));
+
+        // count hits for critical effect
         this.hits++;
     }
+
+    // visitor pattern implementation
     @Override
-    public void launchAttack(Pyromancer opponent) {
+    public final void launchAttack(final Pyromancer opponent) {
         this.setDamageWithoutRaceModif(opponent);
-        opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif * 1.25f);
+
+        // apply race modifier
+        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
+                * RogueConstants.BACKSTAB_PYROMANCER_MODIF));
     }
+
     @Override
-    public void launchAttack(Knight opponent) {
+    public final void launchAttack(final Knight opponent) {
         this.setDamageWithoutRaceModif(opponent);
-        opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif * 0.9f);
+
+        // apply race modifier
+        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
+                * RogueConstants.BACKSTAB_KNIGHT_MODIF));
     }
+
     @Override
-    public void launchAttack(Wizard opponent) {
+    public final void launchAttack(final Wizard opponent) {
         this.setDamageWithoutRaceModif(opponent);
-        opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif * 1.25f);
+
+        // apply race modifier
+        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
+                * RogueConstants.BACKSTAB_WIZARD_MODIF));
     }
+
     @Override
-    public void launchAttack(Rogue opponent) {
+    public final void launchAttack(final Rogue opponent) {
         this.setDamageWithoutRaceModif(opponent);
-        opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif * 1.2f);
+
+        // apply race modifier
+        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
+                * RogueConstants.BACKSTAB_ROGUE_MODIF));
     }
+
     @Override
-    public String toString() {
+    // used for debugging
+    public final String toString() {
         return "Backstab";
     }
 }

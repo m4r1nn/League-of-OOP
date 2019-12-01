@@ -4,21 +4,27 @@ import players.types.Hero;
 
 import java.util.ArrayList;
 
-public class GameMap {
+public final class GameMap {
+    // matrix of fields
     private ArrayList<ArrayList<Fields>> table;
-    private int currentLine;
     private static GameMap instance = null;
+
     private GameMap() {
         this.table = new ArrayList<>();
     }
+
+    // singleton pattern for GameMap, there's no need of more instances
     public static GameMap getInstance() {
         if (instance == null) {
             instance = new GameMap();
         }
         return instance;
     }
-    public void buildLine(char[] fields) {
+
+    // fills a line in matrix with fields based on a char input
+    public void buildLine(final char[] fields) {
         ArrayList<Fields> line = new ArrayList<>();
+
         for (char c : fields) {
             switch (c) {
                 case 'L':
@@ -37,18 +43,25 @@ public class GameMap {
                     throw new IllegalArgumentException();
             }
         }
+
+        // put the line in table
         this.table.add(line);
     }
-    public Fields getField(Hero hero) {
+
+    // returns hero's land type
+    public Fields getField(final Hero hero) {
         Coords coords = hero.getCoords();
         return this.table.get(coords.getLin()).get(coords.getCol());
     }
+
     @Override
+    // used for debugging
     public String toString() {
-        String res = "";
+        StringBuilder res = new StringBuilder();
+
         for (ArrayList<Fields> line : this.table) {
-            res += line.toString() + '\n';
+            res.append(line.toString()).append('\n');
         }
-        return res;
+        return res.toString();
     }
 }

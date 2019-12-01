@@ -1,10 +1,14 @@
 package players.abilities;
 
-import players.types.*;
+import players.types.Pyromancer;
+import players.types.Knight;
+import players.types.Wizard;
+import players.types.Rogue;
 
 public interface IHeroDamage {
-    public void launchAttack(Pyromancer opponent);
-    public void launchAttack(Knight opponent);
-    public void launchAttack(Wizard opponent);
-    public void launchAttack(Rogue opponent);
+    // interface for heroes abilities --- visitor pattern
+    void launchAttack(Pyromancer opponent);
+    void launchAttack(Knight opponent);
+    void launchAttack(Wizard opponent);
+    void launchAttack(Rogue opponent);
 }

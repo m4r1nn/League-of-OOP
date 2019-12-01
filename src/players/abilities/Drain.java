@@ -1,44 +1,80 @@
 package players.abilities;
 
 import common.Fields;
-import players.types.*;
+import players.constants.WizardConstants;
+import players.types.Hero;
+import players.types.Pyromancer;
+import players.types.Knight;
+import players.types.Wizard;
+import players.types.Rogue;
 
 public class Drain extends HeroDamage {
-    public Drain(Hero hero) {
+    // constructor
+    public Drain(final Hero hero) {
         super(hero);
     }
+
     @Override
-    public void setDamageWithoutRaceModif(Hero hero) {
-        float percent = 0.2f + 0.05f * this.getHeroLevel();
-        float baseHP = Math.min(0.3f * hero.maxHP, (float)hero.getHP());
-        hero.damageToTakeWithoutRaceModif = percent * baseHP;
-        if (this.gameMap.getField(this.hero) == Fields.DESERT) {
-            hero.damageToTakeWithoutRaceModif = hero.damageToTakeWithoutRaceModif * 1.1f;
+    public final void setDamageWithoutRaceModif(final Hero hero) {
+        // calculate drain percent and base HP to damage
+        float percent = WizardConstants.DRAIN_PERCENT + WizardConstants.BONUS_DRAIN_PER_LEVEL
+                * this.getHeroLevel();
+        float baseHP = Math.min(WizardConstants.MIN_HP_PERCENT * hero.getMaxHP(),
+                (float) hero.getHP());
+
+        // set the damage
+        hero.setDamageToTakeWithoutRaceModif(percent * baseHP);
+
+        // apply land modifier if possible
+        if (this.getGameMap().getField(this.getHero()) == Fields.DESERT) {
+            hero.setDamageToTakeWithoutRaceModif(hero.getDamageToTakeWithoutRaceModif()
+                    * WizardConstants.LAND_MODIF);
         }
-        hero.totalDamageToTake = Math.round(hero.damageToTakeWithoutRaceModif);
+
+        // for deflect ability
+        hero.setTotalDamageToTake(Math.round(hero.getDamageToTakeWithoutRaceModif()));
     }
+
+    // visitor pattern implementation
     @Override
-    public void launchAttack(Pyromancer opponent) {
+    public final void launchAttack(final Pyromancer opponent) {
         this.setDamageWithoutRaceModif(opponent);
-        opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif * 0.9f);
+
+        // apply race modifier
+        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
+                * WizardConstants.DRAIN_PYROMANCER_MODIF));
     }
+
     @Override
-    public void launchAttack(Knight opponent) {
+    public final void launchAttack(final Knight opponent) {
         this.setDamageWithoutRaceModif(opponent);
-        opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif * 1.2f);
+
+        // apply race modifier
+        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
+                * WizardConstants.DRAIN_KNIGHT_MODIF));
     }
+
     @Override
-    public void launchAttack(Wizard opponent) {
+    public final void launchAttack(final Wizard opponent) {
+
+        // apply race modifier
         this.setDamageWithoutRaceModif(opponent);
-        opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif * 1.05f);
+        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
+                * WizardConstants.DRAIN_WIZARD_MODIF));
     }
+
     @Override
-    public void launchAttack(Rogue opponent) {
+    public final void launchAttack(final Rogue opponent) {
         this.setDamageWithoutRaceModif(opponent);
-        opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif * 0.8f);
+
+        // apply race modifier
+        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
+                * WizardConstants.DRAIN_ROGUE_MODIF));
     }
+
     @Override
-    public String toString() {
+    // used for debugging
+    public final String toString() {
         return "Drain";
     }
 }

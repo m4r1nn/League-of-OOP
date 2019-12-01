@@ -2,79 +2,189 @@ package players.types;
 
 import common.Coords;
 import players.abilities.HeroDamage;
+import players.constants.HeroConstants;
 import players.factory.HeroTypes;
 
 public abstract class Hero implements IHero {
-    protected int HP;
-    protected int XP;
-    protected int level;
-    protected Coords coords;
-    public HeroTypes type;
-    protected int defaultHP;
-    public int maxHP;
-    protected int bonusHPperLevel;
-    public int damageToTake;
-    public float damageToTakeWithoutRaceModif;
-    public int totalDamageToTake;
-    public int damageOverTime = 0;
-    public int roundsOfDamageOverTime = 0;
-    public boolean stunned = false;
-    public int roundsOfStun = 0;
+    private int hP;
+    private int xP;
+    private int level;
 
-    public HeroDamage ability1;
-    public HeroDamage ability2;
+    private Coords coords;
+    private HeroTypes type;
 
-    public int getHP() {
-        return this.HP;
+    private int defaultHP;
+    private int maxHP;
+    private int bonusHPperLevel;
+
+    private int damageToTake;
+    private float damageToTakeWithoutRaceModif;
+    private int totalDamageToTake;
+
+    private int damageOverTime = 0;
+    private int roundsOfDamageOverTime = 0;
+    private boolean stunned = false;
+    private int roundsOfStun = 0;
+
+    private HeroDamage ability1;
+    private HeroDamage ability2;
+
+    // getters and setters
+    public final HeroDamage getAbility1() {
+        return ability1;
     }
-    public void setHP(int HP) {
-        this.HP = HP;
+
+    final void setAbility1(final HeroDamage ability1) {
+        this.ability1 = ability1;
     }
-    public int getXP() {
-        return this.XP;
+
+    public final HeroDamage getAbility2() {
+        return ability2;
     }
-    public void setXP(int XP) {
-        this.XP = XP;
+
+    final void setAbility2(final HeroDamage ability2) {
+        this.ability2 = ability2;
     }
-    public int getLevel() {
+
+    public final int getRoundsOfStun() {
+        return roundsOfStun;
+    }
+
+    public final void setRoundsOfStun(final int roundsOfStun) {
+        this.roundsOfStun = roundsOfStun;
+    }
+
+    public final boolean isStunned() {
+        return stunned;
+    }
+
+    public final void setStunned(final boolean stunned) {
+        this.stunned = stunned;
+    }
+
+    public final int getRoundsOfDamageOverTime() {
+        return roundsOfDamageOverTime;
+    }
+
+    public final void setRoundsOfDamageOverTime(final int roundsOfDamageOverTime) {
+        this.roundsOfDamageOverTime = roundsOfDamageOverTime;
+    }
+
+    public final int getDamageOverTime() {
+        return damageOverTime;
+    }
+
+    public final void setDamageOverTime(final int damageOverTime) {
+        this.damageOverTime = damageOverTime;
+    }
+
+    public final int getTotalDamageToTake() {
+        return totalDamageToTake;
+    }
+
+    public final void setTotalDamageToTake(final int totalDamageToTake) {
+        this.totalDamageToTake = totalDamageToTake;
+    }
+
+    public final float getDamageToTakeWithoutRaceModif() {
+        return damageToTakeWithoutRaceModif;
+    }
+
+    public final void setDamageToTakeWithoutRaceModif(final float damageToTakeWithoutRaceModif) {
+        this.damageToTakeWithoutRaceModif = damageToTakeWithoutRaceModif;
+    }
+
+    final int getDamageToTake() {
+        return damageToTake;
+    }
+
+    public final void setDamageToTake(final int damageToTake) {
+        this.damageToTake = damageToTake;
+    }
+
+    final void setBonusHPperLevel(final int bonusHPperLevel) {
+        this.bonusHPperLevel = bonusHPperLevel;
+    }
+
+    public final int getMaxHP() {
+        return maxHP;
+    }
+
+    final void setMaxHP(final int maxHP) {
+        this.maxHP = maxHP;
+    }
+
+    final void setDefaultHP(final int defaultHP) {
+        this.defaultHP = defaultHP;
+    }
+
+    public final HeroTypes getType() {
+        return type;
+    }
+
+    final void setType(final HeroTypes type) {
+        this.type = type;
+    }
+
+    public final int getHP() {
+        return this.hP;
+    }
+
+    public final void setHP(final int hhP) {
+        this.hP = hhP;
+    }
+
+    public final int getLevel() {
         return this.level;
     }
-    public void setLevel(int level) {
-        this.level = level;
-    }
-    public Coords getCoords() {
+
+    public final Coords getCoords() {
         return this.coords;
     }
-    public void setCoords(Coords coords) {
+
+    public final void setCoords(final Coords coords) {
         this.coords = coords;
     }
+
+    // constructor
     public Hero() {
-        this.XP = 0;
+        this.xP = 0;
         this.level = 0;
     }
-    public void restoreHP() {
-        this.maxHP = this.HP = this.defaultHP + this.bonusHPperLevel * this.level;
+
+    // replace old hp with new hp after hero's level grow
+    private void restoreHP() {
+        this.maxHP = this.defaultHP + this.bonusHPperLevel * this.level;
+        this.hP = this.defaultHP + this.bonusHPperLevel * this.level;
     }
-    public void growXP(int opponentLevel) {
+
+    // add victory xp and calculate the new level
+    public final void growXP(final int opponentLevel) {
         boolean hasGrown = false;
-        this.XP += Math.max(0, 200 - (this.level - opponentLevel) * 40);
-        int XPLevelUp = 250 + this.level * 50;
-        while (this.XP > XPLevelUp) {
+
+        // calculate xp
+        this.xP += Math.max(0, HeroConstants.MAX_XP_TO_GET
+                - (this.level - opponentLevel) * HeroConstants.XP_TO_GET_COEF);
+        int xPLevelUp = HeroConstants.XP_LIMIT_TO_GROW + this.level * HeroConstants.XP_LIMIT_COEF;
+
+        // let the level grow until xp limit
+        while (this.xP >= xPLevelUp) {
             this.level++;
-            XPLevelUp += 50;
+            xPLevelUp += HeroConstants.XP_LIMIT_COEF;
             hasGrown = true;
         }
+
+        // restore hero max hp if it's level has grown
         if (hasGrown) {
             this.restoreHP();
         }
     }
-    @Override
-    public void move() {
 
-    }
     @Override
-    public String toString() {
+    // used for display function
+    public final String toString() {
         char typeChar;
+
         switch (this.type) {
             case PYROMANCER:
                 typeChar = 'P';
@@ -91,12 +201,12 @@ public abstract class Hero implements IHero {
             default:
                 throw new IllegalArgumentException();
         }
+
+        // print hero stats in requested format
         if (this.getHP() <= 0) {
-            String lineToPrint = "" + typeChar + " dead";
-            return  lineToPrint;
+            return "" + typeChar + " dead";
         }
-        String lineToPrint = "" + typeChar + " " + this.getLevel() + " " + this.getXP() + " " + this.getHP() + " "
+        return "" + typeChar + " " + this.getLevel() + " " + this.xP + " " + this.getHP() + " "
                 + this.getCoords().getLin() + " " + this.getCoords().getCol();
-        return lineToPrint;
     }
 }

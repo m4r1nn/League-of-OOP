@@ -1,52 +1,97 @@
 package players.abilities;
 
 import common.Fields;
-import players.types.*;
+import players.constants.PyromancerConstants;
+import players.types.Hero;
+import players.types.Pyromancer;
+import players.types.Knight;
+import players.types.Wizard;
+import players.types.Rogue;
 
 public class Ignite extends HeroDamage {
-    public Ignite(Hero hero) {
+    // constructor
+    public Ignite(final Hero hero) {
         super(hero);
     }
-    @Override
-    public void setDamageWithoutRaceModif(Hero hero) {
-        hero.damageToTakeWithoutRaceModif = 150 + 20 * this.getHeroLevel();
-        hero.damageOverTime = 50 + 30 * this.getHeroLevel();
-        hero.roundsOfDamageOverTime = 2;
-        hero.stunned = false;
-        hero.roundsOfStun = 0;
 
-        if (this.gameMap.getField(this.hero) == Fields.VOLCANIC) {
-            hero.damageToTakeWithoutRaceModif = hero.damageToTakeWithoutRaceModif * 1.25f;
-            hero.damageOverTime = Math.round(hero.damageOverTime * 1.25f);
+    @Override
+    public final void setDamageWithoutRaceModif(final Hero hero) {
+        // set the damage
+        hero.setDamageToTakeWithoutRaceModif(PyromancerConstants.IGNITE_BASE_DAMAGE
+                + PyromancerConstants.BONUS_IGNITE_PER_LEVEL * this.getHeroLevel());
+
+        // set the overtime damage
+        hero.setDamageOverTime(PyromancerConstants.IGNITE_PASSIVE
+                + PyromancerConstants.BONUS_IGNITE_PASSIVE_PER_LEVEL * this.getHeroLevel());
+
+        // set number of rounds for overtime damage
+        hero.setRoundsOfDamageOverTime(PyromancerConstants.ROUNDS_IGNITE_PASSIVE);
+
+        // remove other passive effects
+        hero.setStunned(false);
+        hero.setRoundsOfStun(0);
+
+        // apply land modifier if possible
+        if (this.getGameMap().getField(this.getHero()) == Fields.VOLCANIC) {
+            hero.setDamageToTakeWithoutRaceModif(hero.getDamageToTakeWithoutRaceModif()
+                    * PyromancerConstants.LAND_MODIF);
+            hero.setDamageOverTime(Math.round(hero.getDamageOverTime()
+                    * PyromancerConstants.LAND_MODIF));
         }
-        hero.totalDamageToTake += Math.round(hero.damageToTakeWithoutRaceModif);
+
+        // for deflect ability
+        hero.setTotalDamageToTake(hero.getTotalDamageToTake()
+                + Math.round(hero.getDamageToTakeWithoutRaceModif()));
     }
+
+    // visitor pattern implementation
     @Override
-    public void launchAttack(Pyromancer opponent) {
+    public final void launchAttack(final Pyromancer opponent) {
         this.setDamageWithoutRaceModif(opponent);
-        opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif * 0.9f);
-        opponent.damageOverTime = Math.round(opponent.damageOverTime * 0.9f);
+
+        // apply race modifier
+        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
+                * PyromancerConstants.IGNITE_PYROMANCER_MODIF));
+        opponent.setDamageOverTime(Math.round(opponent.getDamageOverTime()
+                * PyromancerConstants.IGNITE_PYROMANCER_MODIF));
     }
+
     @Override
-    public void launchAttack(Knight opponent) {
+    public final void launchAttack(final Knight opponent) {
         this.setDamageWithoutRaceModif(opponent);
-        opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif * 1.2f);
-        opponent.damageOverTime = Math.round(opponent.damageOverTime * 1.2f);
+
+        // apply race modifier
+        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
+                * PyromancerConstants.IGNITE_KNIGHT_MODIF));
+        opponent.setDamageOverTime(Math.round(opponent.getDamageOverTime()
+                * PyromancerConstants.IGNITE_KNIGHT_MODIF));
     }
+
     @Override
-    public void launchAttack(Wizard opponent) {
+    public final void launchAttack(final Wizard opponent) {
         this.setDamageWithoutRaceModif(opponent);
-        opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif * 1.05f);
-        opponent.damageOverTime = Math.round(opponent.damageOverTime * 1.05f);
+
+        // apply race modifier
+        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
+                * PyromancerConstants.IGNITE_WIZARD_MODIF));
+        opponent.setDamageOverTime(Math.round(opponent.getDamageOverTime()
+                * PyromancerConstants.IGNITE_WIZARD_MODIF));
     }
+
     @Override
-    public void launchAttack(Rogue opponent) {
+    public final void launchAttack(final Rogue opponent) {
         this.setDamageWithoutRaceModif(opponent);
-        opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif * 0.8f);
-        opponent.damageOverTime = Math.round(opponent.damageOverTime * 0.8f);
+
+        // apply race modifier
+        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
+                * PyromancerConstants.IGNITE_ROGUE_MODIF));
+        opponent.setDamageOverTime(Math.round(opponent.getDamageOverTime()
+                * PyromancerConstants.IGNITE_ROGUE_MODIF));
     }
+
     @Override
-    public String toString() {
+    // used for debugging
+    public final String toString() {
         return "Ignite";
     }
 }

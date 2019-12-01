@@ -1,47 +1,86 @@
 package players.abilities;
 
 import common.Fields;
-import players.types.*;
+import players.constants.KnightConstants;
+import players.types.Hero;
+import players.types.Pyromancer;
+import players.types.Knight;
+import players.types.Wizard;
+import players.types.Rogue;
 
 public class Slam extends HeroDamage {
-    public Slam(Hero hero) {
+    // constructor
+    public Slam(final Hero hero) {
         super(hero);
     }
-    @Override
-    public void setDamageWithoutRaceModif(Hero hero) {
-        hero.damageToTakeWithoutRaceModif = 100 + 40 * this.getHeroLevel();
-        if (this.gameMap.getField(this.hero) == Fields.LAND) {
-            hero.damageToTakeWithoutRaceModif = hero.damageToTakeWithoutRaceModif * 1.15f;
-        }
-        hero.totalDamageToTake += Math.round(hero.damageToTakeWithoutRaceModif);
 
-        hero.stunned = true;
-        hero.roundsOfStun = 1;
-        hero.damageOverTime = 0;
-        hero.roundsOfDamageOverTime = 0;
-    }
     @Override
-    public void launchAttack(Pyromancer opponent) {
+    public final void setDamageWithoutRaceModif(final Hero hero) {
+        // set the damage
+        hero.setDamageToTakeWithoutRaceModif(KnightConstants.SLAM_BASE_DAMAGE
+                + KnightConstants.BONUS_SLAM_PER_LEVEL * this.getHeroLevel());
+
+        // apply land modifier if possible
+        if (this.getGameMap().getField(this.getHero()) == Fields.LAND) {
+            hero.setDamageToTakeWithoutRaceModif(hero.getDamageToTakeWithoutRaceModif()
+                    * KnightConstants.LAND_MODIF);
+        }
+
+        // for deflect ability
+        hero.setTotalDamageToTake(hero.getTotalDamageToTake()
+                + Math.round(hero.getDamageToTakeWithoutRaceModif()));
+
+        // apply stun effect
+        hero.setStunned(true);
+        // set number of rounds for stun
+        hero.setRoundsOfStun(KnightConstants.ROUNDS_OF_STUN);
+
+        // remove other passive effects
+        hero.setDamageOverTime(0);
+        hero.setRoundsOfDamageOverTime(0);
+    }
+
+    // visitor pattern implementation
+    @Override
+    public final void launchAttack(final Pyromancer opponent) {
         this.setDamageWithoutRaceModif(opponent);
-        opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif * 0.9f);
+
+        // apply race modifier
+        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
+                * KnightConstants.SLAM_PYROMANCER_MODIF));
     }
+
     @Override
-    public void launchAttack(Knight opponent) {
+    public final void launchAttack(final Knight opponent) {
         this.setDamageWithoutRaceModif(opponent);
-        opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif * 1.2f);
+
+        // apply race modifier
+        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
+                * KnightConstants.SLAM_KNIGHT_MODIF));
     }
+
     @Override
-    public void launchAttack(Wizard opponent) {
+    public final void launchAttack(final Wizard opponent) {
         this.setDamageWithoutRaceModif(opponent);
-        opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif * 1.05f);
+
+        // apply race modifier
+        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
+                * KnightConstants.SLAM_WIZARD_MODIF));
     }
+
     @Override
-    public void launchAttack(Rogue opponent) {
+    public final void launchAttack(final Rogue opponent) {
         this.setDamageWithoutRaceModif(opponent);
-        opponent.damageToTake = Math.round(opponent.damageToTakeWithoutRaceModif * 0.8f);
+
+        // apply race modifier
+        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
+                * KnightConstants.SLAM_ROGUE_MODIF));
     }
+
+
     @Override
-    public String toString() {
+    // used for debugging
+    public final String toString() {
         return "Slam";
     }
 }

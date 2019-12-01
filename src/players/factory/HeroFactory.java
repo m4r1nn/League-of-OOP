@@ -6,16 +6,22 @@ import players.types.Pyromancer;
 import players.types.Rogue;
 import players.types.Wizard;
 
-public class HeroFactory {
+public final class HeroFactory {
     private static HeroFactory instance = null;
+
+    // constructor
     private HeroFactory() { }
+
+    // singleton pattern implementation
     public static HeroFactory getInstance() {
         if (instance == null) {
             instance = new HeroFactory();
         }
         return instance;
     }
-    public Hero createHero(char type) {
+
+    // main purpose of hero factory to create heres
+    public Hero createHero(final char type) {
         switch (type) {
             case 'P':
                 return new Pyromancer();

@@ -1,7 +1,6 @@
 package main;
 
 import common.Coords;
-import common.GameMap;
 import players.factory.HeroTypes;
 import players.types.Hero;
 
@@ -11,39 +10,52 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
-public class GameLogic {
-    private String inputPath;
+class GameLogic {
+    // contains main implementation of the game
     private String outputPath;
     private ArrayList<Hero> players;
     private int roundsNumber;
-    private GameMap gameMap;
     private BufferedReader bfr;
-    public GameLogic(String inputPath, String outputPath, ArrayList<Hero> players, int roundsNumber, BufferedReader bfr) {
-        this.inputPath = inputPath;
+
+    // constructor
+    GameLogic(final String outputPath, final ArrayList<Hero> players,
+              final int roundsNumber, final BufferedReader bfr) {
         this.outputPath = outputPath;
         this.players = players;
         this.roundsNumber = roundsNumber;
-        this.gameMap = GameMap.getInstance();
         this.bfr = bfr;
     }
-    public void movePlayers(char[] directions) {
+
+    // takes char array as parameter and moves all players
+    private void movePlayers(final char[] directions) {
         int i = 0;
+
+        // iterate through heroes list
         for (Hero hero : this.players) {
+
+            // check if hero is alive
             if (hero.getHP() <= 0) {
                 i++;
                 continue;
             }
-            if (hero.stunned == true) {
-                hero.roundsOfStun--;
-                if (hero.roundsOfStun == 0) {
-                    hero.stunned = false;
+
+            // check if hero can move (it's not stunned)
+            if (hero.isStunned()) {
+                // decrease remaining rounds of stun
+                hero.setRoundsOfStun(hero.getRoundsOfStun() - 1);
+                if (hero.getRoundsOfStun() == 0) {
+                    hero.setStunned(false);
                 }
                 i++;
                 continue;
             }
+
+            // get old hero coords to modify
             Coords coords = hero.getCoords();
             int lin = coords.getLin();
             int col = coords.getCol();
+
+            // move hero 0 or 1 cell in a specified direction
             switch (directions[i]) {
                 case 'U':
                     lin--;
@@ -62,74 +74,100 @@ public class GameLogic {
                 default:
                     throw new IllegalArgumentException();
             }
+
+            // replace old coords with the new ones
             hero.setCoords(new Coords(lin, col));
             i++;
         }
     }
-    public void applyOvertimeDamage() {
+
+    // apply passive effects on affected heroes
+    private void applyOvertimeDamage() {
         for (Hero hero : players) {
-            if (hero.roundsOfDamageOverTime > 0) {
-                hero.setHP(hero.getHP() - hero.damageOverTime);
-                hero.roundsOfDamageOverTime--;
+            if (hero.getRoundsOfDamageOverTime() > 0) {
+                hero.setHP(hero.getHP() - hero.getDamageOverTime());
+
+                // decrease remaining rounds of overtime damage
+                hero.setRoundsOfDamageOverTime(hero.getRoundsOfDamageOverTime() - 1);
             }
         }
     }
-    public void fight(Hero hero1, Hero hero2)  {
-        if (hero1.type == HeroTypes.WIZARD && hero2.type != HeroTypes.WIZARD) {
+
+    // takes 2 heroes as parameters and let them fight
+    private void fight(final Hero hero1, final Hero hero2)  {
+
+        // wizard must attack always second because of deflect ability
+        if (hero1.getType() == HeroTypes.WIZARD && hero2.getType() != HeroTypes.WIZARD) {
             this.fight(hero2, hero1);
             return;
         }
-        hero2.takeDamage(hero1.ability1, hero1.ability2);
-        hero1.takeDamage(hero2.ability1, hero2.ability2);
+
+        // calculate and apply the damage for both heroes using visitor pattern
+        hero2.takeDamage(hero1.getAbility1(), hero1.getAbility2());
+        hero1.takeDamage(hero2.getAbility1(), hero2.getAbility2());
+
+        // check if a hero has won the battle (he is alive and the other isn't)
         if (hero1.getHP() > 0 && hero2.getHP() <= 0) {
             hero1.growXP(hero2.getLevel());
         } else if (hero1.getHP() <= 0 && hero2.getHP() > 0) {
             hero2.growXP(hero1.getLevel());
         }
     }
-    public void letHeroesFight() {
+
+    // realise the fight part of the round
+    private void letHeroesFight() {
         for (int i = 0; i < players.size() - 1; i++) {
+
+            // iterate through heroes list
             Hero hero1 = players.get(i);
             for (int j = i + 1; j < players.size(); j++) {
                 Hero hero2 = players.get(j);
-                if (hero1.getHP() > 0 && hero2.getHP() > 0 && hero1.getCoords().equals(hero2.getCoords())) {
+
+                // check if 2 alive heroes are in the same cell to fight
+                if (hero1.getHP() > 0 && hero2.getHP() > 0
+                        && hero1.getCoords().equals(hero2.getCoords())) {
                     this.fight(hero1, hero2);
                 }
             }
         }
     }
-    public void displayHeroes() {
+
+    // display the leader board
+    private void displayHeroes() {
         try {
+            // use buffered writer to parse output
             FileWriter fw = new FileWriter(this.outputPath);
             BufferedWriter bfw = new BufferedWriter(fw);
+
+            // iterate and print heroes final stats
             for (Hero hero : players) {
                 System.out.println(hero.toString());
                 bfw.write(hero.toString() + "\n");
             }
+
             bfw.close();
             fw.close();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    public void runRounds() {
+
+    // main function of game logic
+    final void runRounds() {
         try {
             String line;
-//            for (Hero hero : players) {
-//                System.out.println(hero.toString());
-//            }
+
+            // go through rounds and do the interactions between heroes
             for (int i = 0; i < this.roundsNumber; i++) {
-//                System.out.println("Round: " + i);
                 line = bfr.readLine();
                 char[] directions = line.toCharArray();
                 this.movePlayers(directions);
                 this.applyOvertimeDamage();
                 this.letHeroesFight();
-//                for (Hero hero : players) {
-//                    System.out.println(hero.toString());
-//                }
-//                System.out.println("-----------END ROUND--------");
             }
+
+            // print heroes
             this.displayHeroes();
         } catch (IOException e) {
             e.printStackTrace();
