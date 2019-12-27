@@ -4,6 +4,7 @@ import common.Coords;
 import players.abilities.HeroDamage;
 import players.constants.HeroConstants;
 import players.factory.HeroTypes;
+import players.strategies.Strategy;
 
 public abstract class Hero implements IHero {
     private int hP;
@@ -28,6 +29,73 @@ public abstract class Hero implements IHero {
 
     private HeroDamage ability1;
     private HeroDamage ability2;
+    private Strategy strategy;
+
+    // constructor
+    public Hero() {
+        this.xP = 0;
+        this.level = 0;
+    }
+
+    // replace old hp with new hp after hero's level grow
+    public final void restoreHP() {
+        this.maxHP = this.defaultHP + this.bonusHPperLevel * this.level;
+        this.hP = this.defaultHP + this.bonusHPperLevel * this.level;
+    }
+
+    // add victory xp and calculate the new level
+    public final void growXP(final int opponentLevel) {
+        boolean hasGrown = false;
+
+        // calculate xp
+        this.xP += Math.max(0, HeroConstants.MAX_XP_TO_GET
+                - (this.level - opponentLevel) * HeroConstants.XP_TO_GET_COEF);
+        int xPLevelUp = HeroConstants.XP_LIMIT_TO_GROW + this.level * HeroConstants.XP_LIMIT_COEF;
+
+        // let the level grow until xp limit
+        while (this.xP >= xPLevelUp) {
+            this.level++;
+            xPLevelUp += HeroConstants.XP_LIMIT_COEF;
+            hasGrown = true;
+        }
+
+        // restore hero max hp if it's level has grown
+        if (hasGrown) {
+            this.restoreHP();
+        }
+    }
+
+    public abstract void changeStrategy();
+
+    @Override
+    // used for display function
+    public final String toString() {
+        char typeChar;
+
+        switch (this.type) {
+            case PYROMANCER:
+                typeChar = 'P';
+                break;
+            case KNIGHT:
+                typeChar = 'K';
+                break;
+            case WIZARD:
+                typeChar = 'W';
+                break;
+            case ROGUE:
+                typeChar = 'R';
+                break;
+            default:
+                throw new IllegalArgumentException();
+        }
+
+        // print hero stats in requested format
+        if (this.getHP() <= 0) {
+            return "" + typeChar + " dead";
+        }
+        return "" + typeChar + " " + this.getLevel() + " " + this.xP + " " + this.getHP() + " "
+                + this.getCoords().getLin() + " " + this.getCoords().getCol();
+    }
 
     // getters and setters
     public final HeroDamage getAbility1() {
@@ -118,6 +186,14 @@ public abstract class Hero implements IHero {
         this.defaultHP = defaultHP;
     }
 
+    public final void setXP(final int xxP) {
+        this.xP = xxP;
+    }
+
+    public final int getXP() {
+        return this.xP;
+    }
+
     public final HeroTypes getType() {
         return type;
     }
@@ -134,6 +210,10 @@ public abstract class Hero implements IHero {
         this.hP = hhP;
     }
 
+    public final void setLevel(final int level) {
+        this.level = level;
+    }
+
     public final int getLevel() {
         return this.level;
     }
@@ -146,67 +226,11 @@ public abstract class Hero implements IHero {
         this.coords = coords;
     }
 
-    // constructor
-    public Hero() {
-        this.xP = 0;
-        this.level = 0;
+    public final Strategy getStrategy() {
+        return this.strategy;
     }
 
-    // replace old hp with new hp after hero's level grow
-    private void restoreHP() {
-        this.maxHP = this.defaultHP + this.bonusHPperLevel * this.level;
-        this.hP = this.defaultHP + this.bonusHPperLevel * this.level;
-    }
-
-    // add victory xp and calculate the new level
-    public final void growXP(final int opponentLevel) {
-        boolean hasGrown = false;
-
-        // calculate xp
-        this.xP += Math.max(0, HeroConstants.MAX_XP_TO_GET
-                - (this.level - opponentLevel) * HeroConstants.XP_TO_GET_COEF);
-        int xPLevelUp = HeroConstants.XP_LIMIT_TO_GROW + this.level * HeroConstants.XP_LIMIT_COEF;
-
-        // let the level grow until xp limit
-        while (this.xP >= xPLevelUp) {
-            this.level++;
-            xPLevelUp += HeroConstants.XP_LIMIT_COEF;
-            hasGrown = true;
-        }
-
-        // restore hero max hp if it's level has grown
-        if (hasGrown) {
-            this.restoreHP();
-        }
-    }
-
-    @Override
-    // used for display function
-    public final String toString() {
-        char typeChar;
-
-        switch (this.type) {
-            case PYROMANCER:
-                typeChar = 'P';
-                break;
-            case KNIGHT:
-                typeChar = 'K';
-                break;
-            case WIZARD:
-                typeChar = 'W';
-                break;
-            case ROGUE:
-                typeChar = 'R';
-                break;
-            default:
-                throw new IllegalArgumentException();
-        }
-
-        // print hero stats in requested format
-        if (this.getHP() <= 0) {
-            return "" + typeChar + " dead";
-        }
-        return "" + typeChar + " " + this.getLevel() + " " + this.xP + " " + this.getHP() + " "
-                + this.getCoords().getLin() + " " + this.getCoords().getCol();
+    public final void setStrategy(final Strategy strategy) {
+        this.strategy = strategy;
     }
 }

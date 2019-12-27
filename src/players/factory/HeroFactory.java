@@ -20,7 +20,7 @@ public final class HeroFactory {
         return instance;
     }
 
-    // main purpose of hero factory to create heres
+    // main purpose of hero factory to create heroes
     public Hero createHero(final char type) {
         switch (type) {
             case 'P':

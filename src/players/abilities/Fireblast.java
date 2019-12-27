@@ -12,6 +12,10 @@ public class Fireblast extends HeroDamage {
     // constructor
     public Fireblast(final Hero hero) {
         super(hero);
+        this.setPyromancerModif(PyromancerConstants.FIREBLAST_PYROMANCER_MODIF);
+        this.setKnightModif(PyromancerConstants.FIREBLAST_KNIGHT_MODIF);
+        this.setWizardModif(PyromancerConstants.FIREBLAST_WIZARD_MODIF);
+        this.setRogueModif(PyromancerConstants.FIREBLAST_ROGUE_MODIF);
     }
 
     @Override
@@ -36,8 +40,8 @@ public class Fireblast extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * PyromancerConstants.FIREBLAST_PYROMANCER_MODIF));
+        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+                * this.getPyromancerModif()));
     }
 
     @Override
@@ -45,8 +49,8 @@ public class Fireblast extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * PyromancerConstants.FIREBLAST_KNIGHT_MODIF));
+        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+                * this.getKnightModif()));
     }
 
     @Override
@@ -54,8 +58,8 @@ public class Fireblast extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * PyromancerConstants.FIREBLAST_WIZARD_MODIF));
+        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+                * this.getWizardModif()));
     }
 
     @Override
@@ -63,8 +67,8 @@ public class Fireblast extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * PyromancerConstants.FIREBLAST_ROGUE_MODIF));
+        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+                * this.getRogueModif()));
     }
 
     @Override

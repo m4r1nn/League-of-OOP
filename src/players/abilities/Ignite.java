@@ -12,6 +12,10 @@ public class Ignite extends HeroDamage {
     // constructor
     public Ignite(final Hero hero) {
         super(hero);
+        this.setPyromancerModif(PyromancerConstants.IGNITE_PYROMANCER_MODIF);
+        this.setKnightModif(PyromancerConstants.IGNITE_KNIGHT_MODIF);
+        this.setWizardModif(PyromancerConstants.IGNITE_WIZARD_MODIF);
+        this.setRogueModif(PyromancerConstants.IGNITE_ROGUE_MODIF);
     }
 
     @Override
@@ -50,10 +54,10 @@ public class Ignite extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * PyromancerConstants.IGNITE_PYROMANCER_MODIF));
+        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+                * this.getPyromancerModif()));
         opponent.setDamageOverTime(Math.round(opponent.getDamageOverTime()
-                * PyromancerConstants.IGNITE_PYROMANCER_MODIF));
+                * this.getPyromancerModif()));
     }
 
     @Override
@@ -61,10 +65,10 @@ public class Ignite extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * PyromancerConstants.IGNITE_KNIGHT_MODIF));
+        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+                * this.getKnightModif()));
         opponent.setDamageOverTime(Math.round(opponent.getDamageOverTime()
-                * PyromancerConstants.IGNITE_KNIGHT_MODIF));
+                * this.getKnightModif()));
     }
 
     @Override
@@ -72,10 +76,10 @@ public class Ignite extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * PyromancerConstants.IGNITE_WIZARD_MODIF));
+        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+                * this.getWizardModif()));
         opponent.setDamageOverTime(Math.round(opponent.getDamageOverTime()
-                * PyromancerConstants.IGNITE_WIZARD_MODIF));
+                * this.getWizardModif()));
     }
 
     @Override
@@ -83,10 +87,10 @@ public class Ignite extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * PyromancerConstants.IGNITE_ROGUE_MODIF));
+        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+                * this.getRogueModif()));
         opponent.setDamageOverTime(Math.round(opponent.getDamageOverTime()
-                * PyromancerConstants.IGNITE_ROGUE_MODIF));
+                * this.getRogueModif()));
     }
 
     @Override

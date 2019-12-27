@@ -15,6 +15,10 @@ public class Backstab extends HeroDamage {
     // constructor
     public Backstab(final Hero hero) {
         super(hero);
+        this.setPyromancerModif(RogueConstants.BACKSTAB_PYROMANCER_MODIF);
+        this.setKnightModif(RogueConstants.BACKSTAB_KNIGHT_MODIF);
+        this.setWizardModif(RogueConstants.BACKSTAB_WIZARD_MODIF);
+        this.setRogueModif(RogueConstants.BACKSTAB_ROGUE_MODIF);
     }
 
     @Override
@@ -49,8 +53,8 @@ public class Backstab extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * RogueConstants.BACKSTAB_PYROMANCER_MODIF));
+        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+                * this.getPyromancerModif()));
     }
 
     @Override
@@ -58,8 +62,8 @@ public class Backstab extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * RogueConstants.BACKSTAB_KNIGHT_MODIF));
+        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+                * this.getKnightModif()));
     }
 
     @Override
@@ -67,8 +71,8 @@ public class Backstab extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * RogueConstants.BACKSTAB_WIZARD_MODIF));
+        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+                * this.getWizardModif()));
     }
 
     @Override
@@ -76,8 +80,8 @@ public class Backstab extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * RogueConstants.BACKSTAB_ROGUE_MODIF));
+        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+                * this.getRogueModif()));
     }
 
     @Override

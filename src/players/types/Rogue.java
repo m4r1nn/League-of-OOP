@@ -1,12 +1,18 @@
 package players.types;
 
+import angels.types.Angel;
 import players.abilities.Backstab;
 import players.abilities.HeroDamage;
 import players.abilities.Paralysis;
 import players.constants.RogueConstants;
 import players.factory.HeroTypes;
+import players.strategies.RogueAttackStrategy;
+import players.strategies.RogueDefenceStrategy;
 
 public class Rogue extends Hero {
+    private RogueAttackStrategy attackStrategy;
+    private RogueDefenceStrategy defenceStrategy;
+
     // constructor
     public Rogue() {
         super();
@@ -21,6 +27,21 @@ public class Rogue extends Hero {
         // set abilities
         this.setAbility1(new Backstab(this));
         this.setAbility2(new Paralysis(this));
+
+        this.attackStrategy = new RogueAttackStrategy(this);
+        this.defenceStrategy = new RogueDefenceStrategy(this);
+    }
+
+    @Override
+    public final void changeStrategy() {
+        if (this.getMaxHP() * RogueConstants.MIN_HP_COEF < this.getHP()
+                && this.getHP() < this.getMaxHP() * RogueConstants.MAX_HP_COEF) {
+            this.setStrategy(this.attackStrategy);
+            this.getStrategy().apply();
+        } else if (this.getHP() < this.getMaxHP() * RogueConstants.MIN_HP_COEF) {
+            this.setStrategy(this.defenceStrategy);
+            this.getStrategy().apply();
+        }
     }
 
     @Override
@@ -37,5 +58,10 @@ public class Rogue extends Hero {
 
         // take the damage
         this.setHP(this.getHP() - totalDamage);
+    }
+
+    @Override
+    public final void acceptAngel(final Angel angel) {
+        angel.visitHero(this);
     }
 }

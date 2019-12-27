@@ -12,6 +12,10 @@ public class Deflect extends HeroDamage {
     // constructor
     public Deflect(final Hero hero) {
         super(hero);
+        this.setPyromancerModif(WizardConstants.DEFLECT_PYROMANCER_MODIF);
+        this.setKnightModif(WizardConstants.DEFLECT_KNIGHT_MODIF);
+        this.setWizardModif(WizardConstants.DEFLECT_WIZARD_MODIF);
+        this.setRogueModif(WizardConstants.DEFLECT_ROGUE_DAMAGE);
     }
 
     @Override
@@ -44,8 +48,8 @@ public class Deflect extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * WizardConstants.DEFLECT_PYROMANCER_MODIF));
+        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+                * this.getPyromancerModif()));
     }
 
     @Override
@@ -53,8 +57,8 @@ public class Deflect extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * WizardConstants.DEFLECT_KNIGHT_MODIF));
+        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+                * this.getKnightModif()));
     }
 
     @Override
@@ -62,8 +66,8 @@ public class Deflect extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * WizardConstants.DEFLECT_WIZARD_MODIF));
+        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+                * this.getWizardModif()));
     }
 
     @Override
@@ -71,8 +75,8 @@ public class Deflect extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * WizardConstants.DEFLECT_ROGUE_DAMAGE));
+        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+                * this.getRogueModif()));
     }
 
     @Override

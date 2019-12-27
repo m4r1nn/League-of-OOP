@@ -2,7 +2,6 @@ package main;
 
 import players.types.Hero;
 
-import java.io.BufferedReader;
 import java.util.ArrayList;
 
 public final class Main {
@@ -12,8 +11,10 @@ public final class Main {
         gameInputLoader.readData();
         ArrayList<Hero> players = gameInputLoader.getPlayers();
         int roundsNumber = gameInputLoader.getRoundsNumber();
-        BufferedReader bfr = gameInputLoader.getBfr();
-        GameLogic gameLogic = new GameLogic(args[1], players, roundsNumber, bfr);
+        ArrayList<String> commandLines = gameInputLoader.getCommandsLines();
+        ArrayList<String> angelsLines = gameInputLoader.getAngelsLines();
+        GameLogic gameLogic = new GameLogic(args[1], players, roundsNumber, commandLines,
+                angelsLines);
         gameLogic.runRounds();
     }
 }

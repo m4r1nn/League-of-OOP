@@ -4,10 +4,8 @@ import common.Coords;
 import players.factory.HeroTypes;
 import players.types.Hero;
 
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.util.ArrayList;
 
 class GameLogic {
@@ -15,15 +13,17 @@ class GameLogic {
     private String outputPath;
     private ArrayList<Hero> players;
     private int roundsNumber;
-    private BufferedReader bfr;
+    private ArrayList<String> commandLines;
+    private ArrayList<String> angelsLines;
 
     // constructor
-    GameLogic(final String outputPath, final ArrayList<Hero> players,
-              final int roundsNumber, final BufferedReader bfr) {
+    GameLogic(final String outputPath, final ArrayList<Hero> players, final int roundsNumber,
+              final ArrayList<String> commandLines, final ArrayList<String> angelsLines) {
         this.outputPath = outputPath;
         this.players = players;
         this.roundsNumber = roundsNumber;
-        this.bfr = bfr;
+        this.commandLines = commandLines;
+        this.angelsLines = angelsLines;
     }
 
     // takes char array as parameter and moves all players
@@ -83,12 +83,20 @@ class GameLogic {
 
     // apply passive effects on affected heroes
     private void applyOvertimeDamage() {
-        for (Hero hero : players) {
+        for (Hero hero : this.players) {
             if (hero.getRoundsOfDamageOverTime() > 0) {
                 hero.setHP(hero.getHP() - hero.getDamageOverTime());
 
                 // decrease remaining rounds of overtime damage
                 hero.setRoundsOfDamageOverTime(hero.getRoundsOfDamageOverTime() - 1);
+            }
+        }
+    }
+
+    private void changePlayersStrategies() {
+        for (Hero hero : this.players) {
+            if (!hero.isStunned()) {
+                hero.changeStrategy();
             }
         }
     }
@@ -132,6 +140,12 @@ class GameLogic {
         }
     }
 
+    private void letAngelsCome(final int round) {
+        System.out.println(angelsLines.get(round));
+        String[] args = angelsLines.get(round).split("\\s");
+        System.out.println(args[0]);
+    }
+
     // display the leader board
     private void displayHeroes() {
         try {
@@ -155,22 +169,20 @@ class GameLogic {
 
     // main function of game logic
     final void runRounds() {
-        try {
-            String line;
+        String line;
 
-            // go through rounds and do the interactions between heroes
-            for (int i = 0; i < this.roundsNumber; i++) {
-                line = bfr.readLine();
-                char[] directions = line.toCharArray();
-                this.movePlayers(directions);
-                this.applyOvertimeDamage();
-                this.letHeroesFight();
-            }
-
-            // print heroes
-            this.displayHeroes();
-        } catch (IOException e) {
-            e.printStackTrace();
+        // go through rounds and do the interactions between heroes
+        for (int i = 0; i < this.roundsNumber; i++) {
+            line = commandLines.get(i);
+            char[] directions = line.toCharArray();
+            this.applyOvertimeDamage();
+            this.changePlayersStrategies();
+            this.movePlayers(directions);
+            this.letHeroesFight();
+            this.letAngelsCome(i);
         }
+
+        // print heroes
+        this.displayHeroes();
     }
 }

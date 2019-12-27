@@ -1,0 +1,6 @@
+package angels.factory;
+
+public enum AngelTypes {
+    DAMAGE_ANGEL, DARK_ANGEL, DRACULA, GOOD_BOY, LEVEL_UP_ANGEL, LIFE_GIVER,
+    SMALL_ANGEL, SPAWNER, THE_DOOMER, XP_ANGEL
+}

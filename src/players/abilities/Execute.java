@@ -14,6 +14,10 @@ public class Execute extends HeroDamage {
     // constructor
     public Execute(final Hero hero) {
         super(hero);
+        this.setPyromancerModif(KnightConstants.EXECUTE_PYROMANCER_MODIF);
+        this.setKnightModif(KnightConstants.EXECUTE_KNIGHT_MODIF);
+        this.setWizardModif(KnightConstants.EXECUTE_WIZARD_MODIF);
+        this.setRogueModif(KnightConstants.EXECUTE_ROGUE_MODIF);
     }
 
     @Override
@@ -47,8 +51,8 @@ public class Execute extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * KnightConstants.EXECUTE_PYROMANCER_MODIF));
+        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+                * this.getPyromancerModif()));
 
         // check for special punch
         if (this.possibleDamage >= opponent.getHP()) {
@@ -61,8 +65,8 @@ public class Execute extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * KnightConstants.EXECUTE_KNIGHT_MODIF));
+        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+                * this.getKnightModif()));
 
         // check for special punch
         if (this.possibleDamage >= opponent.getHP()) {
@@ -75,8 +79,8 @@ public class Execute extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * KnightConstants.EXECUTE_WIZARD_MODIF));
+        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+                * this.getWizardModif()));
 
         // check for special punch
         if (this.possibleDamage >= opponent.getHP()) {
@@ -89,8 +93,8 @@ public class Execute extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * KnightConstants.EXECUTE_ROGUE_MODIF));
+        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+                * this.getRogueModif()));
 
         // check for special punch
         if (this.possibleDamage >= opponent.getHP()) {

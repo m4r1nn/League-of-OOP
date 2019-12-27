@@ -12,6 +12,10 @@ public class Paralysis extends HeroDamage {
     // constructor
     public Paralysis(final Hero hero) {
         super(hero);
+        this.setPyromancerModif(RogueConstants.PARALYSIS_PYROMANCER_MODIF);
+        this.setKnightModif(RogueConstants.PARALYSIS_KNIGHT_MODIF);
+        this.setWizardModif(RogueConstants.PARALYSIS_WIZARD_MODIF);
+        this.setRogueModif(RogueConstants.PARALYSIS_ROGUE_MODIF);
     }
 
     @Override
@@ -54,10 +58,10 @@ public class Paralysis extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * RogueConstants.PARALYSIS_PYROMANCER_MODIF));
+        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+                * this.getPyromancerModif()));
         opponent.setDamageOverTime(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * RogueConstants.PARALYSIS_PYROMANCER_MODIF));
+                * this.getPyromancerModif()));
     }
 
     @Override
@@ -65,10 +69,10 @@ public class Paralysis extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * RogueConstants.PARALYSIS_KNIGHT_MODIF));
+        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+                * this.getKnightModif()));
         opponent.setDamageOverTime(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * RogueConstants.PARALYSIS_KNIGHT_MODIF));
+                * this.getKnightModif()));
     }
 
     @Override
@@ -76,10 +80,10 @@ public class Paralysis extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * RogueConstants.PARALYSIS_WIZARD_MODIF));
+        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+                * this.getWizardModif()));
         opponent.setDamageOverTime(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * RogueConstants.PARALYSIS_WIZARD_MODIF));
+                * this.getWizardModif()));
     }
 
     @Override
@@ -87,10 +91,10 @@ public class Paralysis extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * RogueConstants.PARALYSIS_ROGUE_MODIF));
+        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+                * this.getRogueModif()));
         opponent.setDamageOverTime(Math.round(opponent.getDamageToTakeWithoutRaceModif()
-                * RogueConstants.PARALYSIS_ROGUE_MODIF));
+                * this.getRogueModif()));
     }
 
     @Override
