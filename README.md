@@ -86,10 +86,12 @@ given file too.
 	__GameLogic__ class has the main purpose to run all rounds. The events order
 during one round is:\
 	1) parsing the input which contains heroes moving directions\
-	2) moving all the heroes if possible\
-	3) apply overtime damage from previous rounds if it's still valid\
-	4) let players (that are on the same cell) fight\
-	5) go to the next round.
+	2) apply overtime damage from previous rounds if it's still valid\
+	3) change heroes strategies if they need to\
+	4) moving all the heroes if possible\
+	5) let players (that are on the same cell) fight\
+	6) let angels come and help/hit other players\
+	7) go to the next round.
 
 **Some special notes:**
  - I could save the whole input from file including the players moving
