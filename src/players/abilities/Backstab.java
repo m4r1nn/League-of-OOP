@@ -15,6 +15,7 @@ public class Backstab extends HeroDamage {
     // constructor
     public Backstab(final Hero hero) {
         super(hero);
+        // set initial race modifiers
         this.setPyromancerModif(RogueConstants.BACKSTAB_PYROMANCER_MODIF);
         this.setKnightModif(RogueConstants.BACKSTAB_KNIGHT_MODIF);
         this.setWizardModif(RogueConstants.BACKSTAB_WIZARD_MODIF);

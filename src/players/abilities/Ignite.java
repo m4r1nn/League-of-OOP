@@ -12,6 +12,7 @@ public class Ignite extends HeroDamage {
     // constructor
     public Ignite(final Hero hero) {
         super(hero);
+        // set initial race modifiers
         this.setPyromancerModif(PyromancerConstants.IGNITE_PYROMANCER_MODIF);
         this.setKnightModif(PyromancerConstants.IGNITE_KNIGHT_MODIF);
         this.setWizardModif(PyromancerConstants.IGNITE_WIZARD_MODIF);

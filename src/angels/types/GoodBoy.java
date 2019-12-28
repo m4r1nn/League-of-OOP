@@ -1,6 +1,5 @@
 package angels.types;
 
-import angels.constants.DraculaConstants;
 import angels.constants.GoodBoyConstants;
 import angels.factory.AngelTypes;
 import common.Coords;
@@ -25,6 +24,7 @@ public class GoodBoy extends Angel {
     // visitor pattern implementation
     @Override
     public final void visitHero(final Knight hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
@@ -32,6 +32,7 @@ public class GoodBoy extends Angel {
         HeroDamage ability1 = hero.getAbility1();
         HeroDamage ability2 = hero.getAbility2();
 
+        // set abilities modifiers
         ability1.setPyromancerModif(ability1.getPyromancerModif()
                 + GoodBoyConstants.KNIGHT_MODIF);
         ability2.setPyromancerModif(ability2.getPyromancerModif()
@@ -47,6 +48,7 @@ public class GoodBoy extends Angel {
         ability2.setRogueModif(ability2.getRogueModif()
                 + GoodBoyConstants.KNIGHT_MODIF);
 
+        // set new hp and print specific messages
         hero.setHP(hero.getHP() + GoodBoyConstants.KNIGHT_HP);
         if (hero.getHP() > hero.getMaxHP()) {
             hero.setHP(hero.getMaxHP());
@@ -57,6 +59,7 @@ public class GoodBoy extends Angel {
 
     @Override
     public final void visitHero(final Pyromancer hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
@@ -64,6 +67,7 @@ public class GoodBoy extends Angel {
         HeroDamage ability1 = hero.getAbility1();
         HeroDamage ability2 = hero.getAbility2();
 
+        // set abilities modifiers
         ability1.setPyromancerModif(ability1.getPyromancerModif()
                 + GoodBoyConstants.PYROMANCER_MODIF);
         ability2.setPyromancerModif(ability2.getPyromancerModif()
@@ -81,6 +85,7 @@ public class GoodBoy extends Angel {
         ability2.setRogueModif(ability2.getRogueModif()
                 + GoodBoyConstants.PYROMANCER_MODIF);
 
+        // set new hp and print specific messages
         hero.setHP(hero.getHP() + GoodBoyConstants.PYROMANCER_HP);
         if (hero.getHP() > hero.getMaxHP()) {
             hero.setHP(hero.getMaxHP());
@@ -91,6 +96,7 @@ public class GoodBoy extends Angel {
 
     @Override
     public final void visitHero(final Rogue hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
@@ -98,6 +104,7 @@ public class GoodBoy extends Angel {
         HeroDamage ability1 = hero.getAbility1();
         HeroDamage ability2 = hero.getAbility2();
 
+        // set abilities modifiers
         ability1.setPyromancerModif(ability1.getPyromancerModif()
                 + GoodBoyConstants.ROGUE_MODIF);
         ability2.setPyromancerModif(ability2.getPyromancerModif()
@@ -115,6 +122,7 @@ public class GoodBoy extends Angel {
         ability2.setRogueModif(ability2.getRogueModif()
                 + GoodBoyConstants.ROGUE_MODIF);
 
+        // set new hp and print specific messages
         hero.setHP(hero.getHP() + GoodBoyConstants.ROGUE_HP);
         if (hero.getHP() > hero.getMaxHP()) {
             hero.setHP(hero.getMaxHP());
@@ -125,6 +133,7 @@ public class GoodBoy extends Angel {
 
     @Override
     public final void visitHero(final Wizard hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
@@ -132,6 +141,7 @@ public class GoodBoy extends Angel {
         HeroDamage ability1 = hero.getAbility1();
         HeroDamage ability2 = hero.getAbility2();
 
+        // set abilities modifiers
         ability1.setPyromancerModif(ability1.getPyromancerModif()
                 + GoodBoyConstants.WIZARD_MODIF);
         ability2.setPyromancerModif(ability2.getPyromancerModif()
@@ -149,6 +159,7 @@ public class GoodBoy extends Angel {
         ability2.setRogueModif(ability2.getRogueModif()
                 + GoodBoyConstants.WIZARD_MODIF);
 
+        // set new hp and print specific messages
         hero.setHP(hero.getHP() + GoodBoyConstants.WIZARD_HP);
         if (hero.getHP() > hero.getMaxHP()) {
             hero.setHP(hero.getMaxHP());

@@ -12,6 +12,7 @@ public class Fireblast extends HeroDamage {
     // constructor
     public Fireblast(final Hero hero) {
         super(hero);
+        // set initial race modifiers
         this.setPyromancerModif(PyromancerConstants.FIREBLAST_PYROMANCER_MODIF);
         this.setKnightModif(PyromancerConstants.FIREBLAST_KNIGHT_MODIF);
         this.setWizardModif(PyromancerConstants.FIREBLAST_WIZARD_MODIF);

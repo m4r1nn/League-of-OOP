@@ -23,10 +23,12 @@ public class DarkAngel extends Angel {
     // visitor pattern implementation
     @Override
     public final void visitHero(final Knight hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
 
+        // set new hp and print specific messages
         hero.setHP(hero.getHP() + DarkAngelConstants.KNIGHT_HP);
         this.notifyObservers(hero, null, this, "AngelHit");
 
@@ -37,10 +39,12 @@ public class DarkAngel extends Angel {
 
     @Override
     public final void visitHero(final Pyromancer hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
 
+        // set new hp and print specific messages
         hero.setHP(hero.getHP() + DarkAngelConstants.PYROMANCER_HP);
         this.notifyObservers(hero, null, this, "AngelHit");
 
@@ -51,10 +55,12 @@ public class DarkAngel extends Angel {
 
     @Override
     public final void visitHero(final Rogue hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
 
+        // set new hp and print specific messages
         hero.setHP(hero.getHP() + DarkAngelConstants.ROGUE_HP);
         this.notifyObservers(hero, null, this, "AngelHit");
 
@@ -65,10 +71,12 @@ public class DarkAngel extends Angel {
 
     @Override
     public final void visitHero(final Wizard hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
 
+        // set new hp and print specific messages
         hero.setHP(hero.getHP() + DarkAngelConstants.WIZARD_HP);
         this.notifyObservers(hero, null, this, "AngelHit");
 

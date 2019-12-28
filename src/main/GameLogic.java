@@ -32,6 +32,7 @@ class GameLogic extends Subject {
         this.commandLines = commandLines;
         this.angelsLines = angelsLines;
         this.angelFactory = AngelFactory.getInstance();
+
         this.observer = observer;
         this.addObserver(this.observer);
     }
@@ -103,6 +104,7 @@ class GameLogic extends Subject {
         }
     }
 
+    // let heroes decide to change their strategies or not
     private void changePlayersStrategies() {
         for (Hero hero : this.players) {
             if (!hero.isStunned()) {
@@ -124,14 +126,14 @@ class GameLogic extends Subject {
         hero2.takeDamage(hero1.getAbility1(), hero1.getAbility2());
         hero1.takeDamage(hero2.getAbility1(), hero2.getAbility2());
 
-        // check if a hero has won the battle (he is alive and the other isn't)
+        // check if a hero has won the battle and print specific messages
         if (hero1.getHP() > 0 && hero2.getHP() <= 0) {
             this.notifyObservers(hero2, hero1, null, "HeroesFight");
             hero1.growXP(hero2.getLevel());
         } else if (hero1.getHP() <= 0 && hero2.getHP() > 0) {
             this.notifyObservers(hero1, hero2, null, "HeroesFight");
             hero2.growXP(hero1.getLevel());
-        } else if (hero1.getHP() <= 0 && hero2.getHP() <= 0) {
+        } else if (hero1.getHP() <= 0) {
             this.notifyObservers(hero2, hero1, null, "HeroesFight");
             this.notifyObservers(hero1, hero2, null, "HeroesFight");
         }
@@ -155,14 +157,19 @@ class GameLogic extends Subject {
         }
     }
 
+    // let angels arrive and apply their effects
     private void letAngelsCome(final int round) {
         String[] args = angelsLines.get(round).split("\\s");
+
         for (int i = 0; i < Integer.parseInt(args[0]); i++) {
             String[] items = args[i + 1].split(",");
             int lin = Integer.parseInt(items[1]);
             int col = Integer.parseInt(items[2]);
+
+            // use angel factory to create angels
             Angel angel = angelFactory.createAngel(items[0], new Coords(lin, col), observer);
             for (Hero hero : this.players) {
+                // let angels interact with heroes
                 if (hero.getCoords().equals(angel.getCoords())) {
                     hero.acceptAngel(angel);
                 }
@@ -184,6 +191,7 @@ class GameLogic extends Subject {
         }
     }
 
+    // print output message in file using buffered writer
     private void printInFile() {
         try {
             FileWriter fw = new FileWriter(this.outputPath);
@@ -213,9 +221,6 @@ class GameLogic extends Subject {
             this.changePlayersStrategies();
             this.movePlayers(directions);
             this.letHeroesFight();
-//            for (Hero hero : this.players) {
-//                System.out.println(hero);
-//            }
             this.letAngelsCome(i);
 
             System.out.println();

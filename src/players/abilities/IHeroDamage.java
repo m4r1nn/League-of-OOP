@@ -6,6 +6,7 @@ import players.types.Wizard;
 import players.types.Rogue;
 
 public interface IHeroDamage {
+
     // interface for heroes abilities --- visitor pattern
     void launchAttack(Pyromancer opponent);
     void launchAttack(Knight opponent);

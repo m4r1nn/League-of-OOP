@@ -23,10 +23,12 @@ public class Spawner extends Angel {
     // visitor pattern implementation
     @Override
     public final void visitHero(final Knight hero) {
+        // interact only if hero is dead
         if (hero.getHP() > 0) {
             return;
         }
 
+        // set new hp and print specific messages
         hero.setHP(SpawnerConstants.KNIGHT_HP);
 
         this.notifyObservers(hero, null, this, "AngelHelp");
@@ -35,10 +37,12 @@ public class Spawner extends Angel {
 
     @Override
     public final void visitHero(final Pyromancer hero) {
+        // interact only if hero is dead
         if (hero.getHP() > 0) {
             return;
         }
 
+        // set new hp and print specific messages
         hero.setHP(SpawnerConstants.PYROMANCER_HP);
 
         this.notifyObservers(hero, null, this, "AngelHelp");
@@ -47,10 +51,12 @@ public class Spawner extends Angel {
 
     @Override
     public final void visitHero(final Rogue hero) {
+        // interact only if hero is dead
         if (hero.getHP() > 0) {
             return;
         }
 
+        // set new hp and print specific messages
         hero.setHP(SpawnerConstants.ROGUE_HP);
 
         this.notifyObservers(hero, null, this, "AngelHelp");
@@ -59,10 +65,12 @@ public class Spawner extends Angel {
 
     @Override
     public final void visitHero(final Wizard hero) {
+        // interact only if hero is dead
         if (hero.getHP() > 0) {
             return;
         }
 
+        // set new hp and print specific messages
         hero.setHP(SpawnerConstants.WIZARD_HP);
 
         this.notifyObservers(hero, null, this, "AngelHelp");

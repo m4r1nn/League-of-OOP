@@ -12,6 +12,7 @@ public class Slam extends HeroDamage {
     // constructor
     public Slam(final Hero hero) {
         super(hero);
+        // set initial race modifiers
         this.setPyromancerModif(KnightConstants.SLAM_PYROMANCER_MODIF);
         this.setKnightModif(KnightConstants.SLAM_KNIGHT_MODIF);
         this.setWizardModif(KnightConstants.SLAM_WIZARD_MODIF);

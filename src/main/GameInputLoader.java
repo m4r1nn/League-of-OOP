@@ -76,10 +76,14 @@ public class GameInputLoader {
             // read number of rounds to play
             line = bfr.readLine();
             this.roundsNumber = Integer.parseInt(line);
+
+            // read commands
             for (int i = 0; i < roundsNumber; i++) {
                 line = bfr.readLine();
                 commandsLines.add(line);
             }
+
+            // read angels
             for (int i = 0; i < roundsNumber; i++) {
                 line = bfr.readLine();
                 angelsLines.add(line);

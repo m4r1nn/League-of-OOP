@@ -24,6 +24,7 @@ public class Dracula extends Angel {
     // visitor pattern implementation
     @Override
     public final void visitHero(final Knight hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
@@ -31,6 +32,7 @@ public class Dracula extends Angel {
         HeroDamage ability1 = hero.getAbility1();
         HeroDamage ability2 = hero.getAbility2();
 
+        // set abilities modifiers
         ability1.setPyromancerModif(ability1.getPyromancerModif()
                 + DraculaConstants.KNIGHT_MODIF);
         ability2.setPyromancerModif(ability2.getPyromancerModif()
@@ -46,6 +48,7 @@ public class Dracula extends Angel {
         ability2.setRogueModif(ability2.getRogueModif()
                 + DraculaConstants.KNIGHT_MODIF);
 
+        // set new hp and print specific messages
         hero.setHP(hero.getHP() + DraculaConstants.KNIGHT_HP);
         this.notifyObservers(hero, null, this, "AngelHit");
 
@@ -56,6 +59,7 @@ public class Dracula extends Angel {
 
     @Override
     public final void visitHero(final Pyromancer hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
@@ -63,6 +67,7 @@ public class Dracula extends Angel {
         HeroDamage ability1 = hero.getAbility1();
         HeroDamage ability2 = hero.getAbility2();
 
+        // set abilities modifiers
         ability1.setPyromancerModif(ability1.getPyromancerModif()
                 + DraculaConstants.PYROMANCER_MODIF);
         ability2.setPyromancerModif(ability2.getPyromancerModif()
@@ -80,6 +85,7 @@ public class Dracula extends Angel {
         ability2.setRogueModif(ability2.getRogueModif()
                 + DraculaConstants.PYROMANCER_MODIF);
 
+        // set new hp and print specific messages
         hero.setHP(hero.getHP() + DraculaConstants.PYROMANCER_HP);
         this.notifyObservers(hero, null, this, "AngelHit");
 
@@ -90,6 +96,7 @@ public class Dracula extends Angel {
 
     @Override
     public final void visitHero(final Rogue hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
@@ -97,6 +104,7 @@ public class Dracula extends Angel {
         HeroDamage ability1 = hero.getAbility1();
         HeroDamage ability2 = hero.getAbility2();
 
+        // set abilities modifiers
         ability1.setPyromancerModif(ability1.getPyromancerModif()
                 + DraculaConstants.ROGUE_MODIF);
         ability2.setPyromancerModif(ability2.getPyromancerModif()
@@ -114,6 +122,7 @@ public class Dracula extends Angel {
         ability2.setRogueModif(ability2.getRogueModif()
                 + DraculaConstants.ROGUE_MODIF);
 
+        // set new hp and print specific messages
         hero.setHP(hero.getHP() + DraculaConstants.ROGUE_HP);
         this.notifyObservers(hero, null, this, "AngelHit");
 
@@ -124,6 +133,7 @@ public class Dracula extends Angel {
 
     @Override
     public final void visitHero(final Wizard hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
@@ -131,6 +141,7 @@ public class Dracula extends Angel {
         HeroDamage ability1 = hero.getAbility1();
         HeroDamage ability2 = hero.getAbility2();
 
+        // set abilities modifiers
         ability1.setPyromancerModif(ability1.getPyromancerModif()
                 + DraculaConstants.WIZARD_MODIF);
         ability2.setPyromancerModif(ability2.getPyromancerModif()
@@ -148,6 +159,7 @@ public class Dracula extends Angel {
         ability2.setRogueModif(ability2.getRogueModif()
                 + DraculaConstants.WIZARD_MODIF);
 
+        // set new hp and print specific messages
         hero.setHP(hero.getHP() + DraculaConstants.WIZARD_HP);
         this.notifyObservers(hero, null, this, "AngelHit");
 

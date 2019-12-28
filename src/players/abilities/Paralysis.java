@@ -12,6 +12,7 @@ public class Paralysis extends HeroDamage {
     // constructor
     public Paralysis(final Hero hero) {
         super(hero);
+        // set initial race modifiers
         this.setPyromancerModif(RogueConstants.PARALYSIS_PYROMANCER_MODIF);
         this.setKnightModif(RogueConstants.PARALYSIS_KNIGHT_MODIF);
         this.setWizardModif(RogueConstants.PARALYSIS_WIZARD_MODIF);

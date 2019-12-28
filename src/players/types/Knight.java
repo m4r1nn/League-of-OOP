@@ -30,17 +30,22 @@ public class Knight extends Hero {
         this.setAbility1(new Execute(this));
         this.setAbility2(new Slam(this));
 
+        // set base strategies
         this.attackStrategy = new KnightAttackStrategy(this);
         this.defenceStrategy = new KnightDefenceStrategy(this);
     }
 
     @Override
     public final void changeStrategy() {
-        if (this.getMaxHP() * KnightConstants.MIN_HP_COEF < this.getHP()
-                && this.getHP() < this.getMaxHP() * KnightConstants.MAX_HP_COEF) {
+        if (Math.round(this.getMaxHP() * KnightConstants.MIN_HP_COEF) < this.getHP()
+                && this.getHP() < Math.round(this.getMaxHP() * KnightConstants.MAX_HP_COEF)) {
+
+            // choose and apply attack strategy
             this.setStrategy(this.attackStrategy);
             this.getStrategy().apply();
-        } else if (this.getHP() < this.getMaxHP() * KnightConstants.MIN_HP_COEF) {
+        } else if (this.getHP() < Math.round(this.getMaxHP() * KnightConstants.MIN_HP_COEF)) {
+
+            // choose and apply defence strategy
             this.setStrategy(this.defenceStrategy);
             this.getStrategy().apply();
         }

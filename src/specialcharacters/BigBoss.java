@@ -11,10 +11,12 @@ public class BigBoss extends Observer {
     @Override
     public final void update(final Hero heroo1, final Hero heroo2, final Angel angell,
                              final String messageType) {
+        // update old stats
         this.hero1 = heroo1;
         this.hero2 = heroo2;
         this.angel = angell;
 
+        // print message depending on action that has happened
         switch (messageType) {
             case "HeroesFight":
                 this.displayHeroesFight();

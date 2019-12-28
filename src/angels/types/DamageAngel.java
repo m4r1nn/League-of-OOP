@@ -1,7 +1,6 @@
 package angels.types;
 
 import angels.constants.DamageAngelConstants;
-import angels.constants.DraculaConstants;
 import angels.factory.AngelTypes;
 import common.Coords;
 import players.abilities.HeroDamage;
@@ -25,6 +24,7 @@ public class DamageAngel extends Angel {
     // visitor pattern implementation
     @Override
     public final void visitHero(final Knight hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
@@ -32,6 +32,7 @@ public class DamageAngel extends Angel {
         HeroDamage ability1 = hero.getAbility1();
         HeroDamage ability2 = hero.getAbility2();
 
+        // set abilities modifiers
         ability1.setPyromancerModif(ability1.getPyromancerModif()
                 + DamageAngelConstants.KNIGHT_MODIF);
         ability2.setPyromancerModif(ability2.getPyromancerModif()
@@ -47,11 +48,13 @@ public class DamageAngel extends Angel {
         ability2.setRogueModif(ability2.getRogueModif()
                 + DamageAngelConstants.KNIGHT_MODIF);
 
+        // print specific message
         this.notifyObservers(hero, null, this, "AngelHelp");
     }
 
     @Override
     public final void visitHero(final Pyromancer hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
@@ -59,6 +62,7 @@ public class DamageAngel extends Angel {
         HeroDamage ability1 = hero.getAbility1();
         HeroDamage ability2 = hero.getAbility2();
 
+        // set abilities modifiers
         ability1.setPyromancerModif(ability1.getPyromancerModif()
                 + DamageAngelConstants.PYROMANCER_MODIF);
         ability2.setPyromancerModif(ability2.getPyromancerModif()
@@ -76,11 +80,13 @@ public class DamageAngel extends Angel {
         ability2.setRogueModif(ability2.getRogueModif()
                 + DamageAngelConstants.PYROMANCER_MODIF);
 
+        // print specific message
         this.notifyObservers(hero, null, this, "AngelHelp");
     }
 
     @Override
     public final void visitHero(final Rogue hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
@@ -88,6 +94,7 @@ public class DamageAngel extends Angel {
         HeroDamage ability1 = hero.getAbility1();
         HeroDamage ability2 = hero.getAbility2();
 
+        // set abilities modifiers
         ability1.setPyromancerModif(ability1.getPyromancerModif()
                 + DamageAngelConstants.ROGUE_MODIF);
         ability2.setPyromancerModif(ability2.getPyromancerModif()
@@ -105,11 +112,13 @@ public class DamageAngel extends Angel {
         ability2.setRogueModif(ability2.getRogueModif()
                 + DamageAngelConstants.ROGUE_MODIF);
 
+        // print specific message
         this.notifyObservers(hero, null, this, "AngelHelp");
     }
 
     @Override
     public final void visitHero(final Wizard hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
@@ -117,6 +126,7 @@ public class DamageAngel extends Angel {
         HeroDamage ability1 = hero.getAbility1();
         HeroDamage ability2 = hero.getAbility2();
 
+        // set abilities modifiers
         ability1.setPyromancerModif(ability1.getPyromancerModif()
                 + DamageAngelConstants.WIZARD_MODIF);
         ability2.setPyromancerModif(ability2.getPyromancerModif()
@@ -134,6 +144,7 @@ public class DamageAngel extends Angel {
         ability2.setRogueModif(ability2.getRogueModif()
                 + DamageAngelConstants.WIZARD_MODIF);
 
+        // print specific message
         this.notifyObservers(hero, null, this, "AngelHelp");
     }
 }

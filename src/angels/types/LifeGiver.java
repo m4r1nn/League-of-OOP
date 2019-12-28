@@ -22,10 +22,12 @@ public class LifeGiver extends Angel {
     // visitor pattern implementation
     @Override
     public final void visitHero(final Knight hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
 
+        // set new hp and print specific message
         hero.setHP(hero.getHP() + LifeGiverConstants.KNIGHT_HP);
         if (hero.getHP() > hero.getMaxHP()) {
             hero.setHP(hero.getMaxHP());
@@ -36,10 +38,12 @@ public class LifeGiver extends Angel {
 
     @Override
     public final void visitHero(final Pyromancer hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
 
+        // set new hp and print specific message
         hero.setHP(hero.getHP() + LifeGiverConstants.PYROMANCER_HP);
         if (hero.getHP() > hero.getMaxHP()) {
             hero.setHP(hero.getMaxHP());
@@ -50,10 +54,12 @@ public class LifeGiver extends Angel {
 
     @Override
     public final void visitHero(final Rogue hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
 
+        // set new hp and print specific message
         hero.setHP(hero.getHP() + LifeGiverConstants.ROGUE_HP);
         if (hero.getHP() > hero.getMaxHP()) {
             hero.setHP(hero.getMaxHP());
@@ -64,10 +70,12 @@ public class LifeGiver extends Angel {
 
     @Override
     public final void visitHero(final Wizard hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
 
+        // set new hp and print specific message
         hero.setHP(hero.getHP() + LifeGiverConstants.WIZARD_HP);
         if (hero.getHP() > hero.getMaxHP()) {
             hero.setHP(hero.getMaxHP());

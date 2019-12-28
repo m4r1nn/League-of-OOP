@@ -30,17 +30,22 @@ public class Wizard extends Hero {
         this.setAbility1(new Drain(this));
         this.setAbility2(new Deflect(this));
 
+        // set base strategies
         this.attackStrategy = new WizardAttackStrategy(this);
         this.defenceStrategy = new WizardDefenceStrategy(this);
     }
 
     @Override
     public final void changeStrategy() {
-        if (this.getMaxHP() * WizardConstants.MIN_HP_COEF < this.getHP()
-                && this.getHP() < this.getMaxHP() * WizardConstants.MAX_HP_COEF) {
+        if (Math.round(this.getMaxHP() * WizardConstants.MIN_HP_COEF) < this.getHP()
+                && this.getHP() < Math.round(this.getMaxHP() * WizardConstants.MAX_HP_COEF)) {
+
+            // choose and apply attack strategy
             this.setStrategy(this.attackStrategy);
             this.getStrategy().apply();
-        } else if (this.getHP() < this.getMaxHP() * WizardConstants.MIN_HP_COEF) {
+        } else if (this.getHP() < Math.round(this.getMaxHP() * WizardConstants.MIN_HP_COEF)) {
+
+            // choose and apply defence strategy
             this.setStrategy(this.defenceStrategy);
             this.getStrategy().apply();
         }

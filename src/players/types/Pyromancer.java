@@ -30,17 +30,22 @@ public class Pyromancer extends Hero {
         this.setAbility1(new Fireblast(this));
         this.setAbility2(new Ignite(this));
 
+        // set base strategies
         this.attackStrategy = new PyromancerAttackStrategy(this);
         this.defenceStrategy = new PyromancerDefenceStrategy(this);
     }
 
     @Override
     public final void changeStrategy() {
-        if (this.getMaxHP() * PyromancerConstants.MIN_HP_COEF < this.getHP()
-                && this.getHP() < this.getMaxHP() * PyromancerConstants.MAX_HP_COEF) {
+        if (Math.round(this.getMaxHP() * PyromancerConstants.MIN_HP_COEF) < this.getHP()
+                && this.getHP() < Math.round(this.getMaxHP() * PyromancerConstants.MAX_HP_COEF)) {
+
+            // choose and apply attack strategy
             this.setStrategy(this.attackStrategy);
             this.getStrategy().apply();
-        } else if (this.getHP() < this.getMaxHP() * PyromancerConstants.MIN_HP_COEF) {
+        } else if (this.getHP() < Math.round(this.getMaxHP() * PyromancerConstants.MIN_HP_COEF)) {
+
+            // choose and apply defence strategy
             this.setStrategy(this.defenceStrategy);
             this.getStrategy().apply();
         }

@@ -24,16 +24,19 @@ public class XPAngel extends Angel {
     // visitor pattern implementation
     @Override
     public final  void visitHero(final Knight hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
 
+        // set new xp and print specific message
         hero.setXP(hero.getXP() + XPAngelConstants.KNIGHT_XP);
         int xPLevelUp = HeroConstants.XP_LIMIT_TO_GROW + hero.getLevel()
                 * HeroConstants.XP_LIMIT_COEF;
 
         this.notifyObservers(hero, null, this, "AngelHelp");
 
+        // check if level has changed
         boolean hasGrown = false;
         while (hero.getXP() >= xPLevelUp) {
             hero.setLevel(hero.getLevel() + 1);
@@ -49,16 +52,19 @@ public class XPAngel extends Angel {
 
     @Override
     public final void visitHero(final Pyromancer hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
 
+        // set new xp and print specific message
         hero.setXP(hero.getXP() + XPAngelConstants.PYROMANCER_XP);
         int xPLevelUp = HeroConstants.XP_LIMIT_TO_GROW + hero.getLevel()
                 * HeroConstants.XP_LIMIT_COEF;
 
         this.notifyObservers(hero, null, this, "AngelHelp");
 
+        // check if level has changed
         boolean hasGrown = false;
         while (hero.getXP() >= xPLevelUp) {
             hero.setLevel(hero.getLevel() + 1);
@@ -74,16 +80,19 @@ public class XPAngel extends Angel {
 
     @Override
     public final void visitHero(final Rogue hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
 
+        // set new xp and print specific message
         hero.setXP(hero.getXP() + XPAngelConstants.ROGUE_XP);
         int xPLevelUp = HeroConstants.XP_LIMIT_TO_GROW + hero.getLevel()
                 * HeroConstants.XP_LIMIT_COEF;
 
         this.notifyObservers(hero, null, this, "AngelHelp");
 
+        // check if level has changed
         boolean hasGrown = false;
         while (hero.getXP() >= xPLevelUp) {
             hero.setLevel(hero.getLevel() + 1);
@@ -99,16 +108,19 @@ public class XPAngel extends Angel {
 
     @Override
     public final void visitHero(final Wizard hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
 
+        // set new xp and print specific message
         hero.setXP(hero.getXP() + XPAngelConstants.WIZARD_XP);
         int xPLevelUp = HeroConstants.XP_LIMIT_TO_GROW + hero.getLevel()
                 * HeroConstants.XP_LIMIT_COEF;
 
         this.notifyObservers(hero, null, this, "AngelHelp");
 
+        // check if level has changed
         boolean hasGrown = false;
         while (hero.getXP() >= xPLevelUp) {
             hero.setLevel(hero.getLevel() + 1);

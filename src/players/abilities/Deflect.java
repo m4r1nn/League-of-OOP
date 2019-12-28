@@ -12,6 +12,7 @@ public class Deflect extends HeroDamage {
     // constructor
     public Deflect(final Hero hero) {
         super(hero);
+        // set initial race modifiers
         this.setPyromancerModif(WizardConstants.DEFLECT_PYROMANCER_MODIF);
         this.setKnightModif(WizardConstants.DEFLECT_KNIGHT_MODIF);
         this.setWizardModif(WizardConstants.DEFLECT_WIZARD_MODIF);
@@ -48,7 +49,7 @@ public class Deflect extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
                 * this.getPyromancerModif()));
     }
 
@@ -57,7 +58,7 @@ public class Deflect extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
                 * this.getKnightModif()));
     }
 
@@ -66,8 +67,8 @@ public class Deflect extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
-                * this.getWizardModif()));
+        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
+                * WizardConstants.DEFLECT_WIZARD_MODIF));
     }
 
     @Override
@@ -75,7 +76,7 @@ public class Deflect extends HeroDamage {
         this.setDamageWithoutRaceModif(opponent);
 
         // apply race modifier
-        opponent.setDamageToTake(Math.round(Math.round(opponent.getDamageToTakeWithoutRaceModif())
+        opponent.setDamageToTake(Math.round(opponent.getDamageToTakeWithoutRaceModif()
                 * this.getRogueModif()));
     }
 

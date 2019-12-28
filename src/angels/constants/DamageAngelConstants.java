@@ -3,6 +3,7 @@ package angels.constants;
 public final class DamageAngelConstants {
     private DamageAngelConstants() { }
 
+    // used for changing modifiers
     public static final float KNIGHT_MODIF = 0.15f;
     public static final float PYROMANCER_MODIF = 0.2f;
     public static final float ROGUE_MODIF = 0.3f;

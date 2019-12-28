@@ -32,9 +32,11 @@ public final class WizardConstants {
     // land modifier
     public static final float LAND_MODIF = 1.1f;
 
+    // mark for choosing strategy
     public static final float MIN_HP_COEF = 1f / 4f;
     public static final float MAX_HP_COEF = 1f / 2f;
 
+    // strategy race and hp modifiers
     public static final float ATTACK_STRATEGY_HP = 9f / 10f;
     public static final float ATTACK_STRATEGY_MODIF = 0.6f;
     public static final float DEFENCE_STRATEGY_HP = 6f / 5f;

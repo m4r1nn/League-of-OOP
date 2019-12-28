@@ -33,9 +33,11 @@ public final class PyromancerConstants {
     // land modifier
     public static final float LAND_MODIF = 1.25f;
 
+    // mark for choosing strategy
     public static final float MIN_HP_COEF = 1f / 4f;
     public static final float MAX_HP_COEF = 1f / 3f;
 
+    // strategy race and hp modifiers
     public static final float ATTACK_STRATEGY_HP = 3f / 4f;
     public static final float ATTACK_STRATEGY_MODIF = 0.7f;
     public static final float DEFENCE_STRATEGY_HP = 4f / 3f;

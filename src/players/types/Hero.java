@@ -57,7 +57,7 @@ public abstract class Hero extends Subject implements IHero {
                 - (this.level - opponentLevel) * HeroConstants.XP_TO_GET_COEF);
         int xPLevelUp = HeroConstants.XP_LIMIT_TO_GROW + this.level * HeroConstants.XP_LIMIT_COEF;
 
-        // let the level grow until xp limit
+        // let the level grow until xp limit and print specific messages
         while (this.xP >= xPLevelUp) {
             this.level++;
             xPLevelUp += HeroConstants.XP_LIMIT_COEF;

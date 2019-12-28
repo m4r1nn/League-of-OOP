@@ -22,10 +22,12 @@ public class TheDoomer extends Angel {
     // visitor pattern implementation
     @Override
     public final void visitHero(final Knight hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
 
+        // kill hero and print specific messages
         hero.setHP(0);
 
         this.notifyObservers(hero, null, this, "AngelHit");
@@ -34,10 +36,12 @@ public class TheDoomer extends Angel {
 
     @Override
     public final void visitHero(final Pyromancer hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
 
+        // kill hero and print specific messages
         hero.setHP(0);
 
         this.notifyObservers(hero, null, this, "AngelHit");
@@ -46,10 +50,12 @@ public class TheDoomer extends Angel {
 
     @Override
     public final void visitHero(final Rogue hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
 
+        // kill hero and print specific messages
         hero.setHP(0);
 
         this.notifyObservers(hero, null, this, "AngelHit");
@@ -58,10 +64,12 @@ public class TheDoomer extends Angel {
 
     @Override
     public final void visitHero(final Wizard hero) {
+        // interact only if hero is alive
         if (hero.getHP() <= 0) {
             return;
         }
 
+        // kill hero and print specific messages
         hero.setHP(0);
 
         this.notifyObservers(hero, null, this, "AngelHit");

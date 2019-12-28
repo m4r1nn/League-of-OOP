@@ -6,6 +6,7 @@ import players.types.Rogue;
 import players.types.Wizard;
 
 public interface IAngel {
+
     // interface for angel behaviour depending on hero type --- visitor pattern
     void visitHero(Knight hero);
     void visitHero(Pyromancer hero);

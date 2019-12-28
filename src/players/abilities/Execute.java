@@ -14,6 +14,7 @@ public class Execute extends HeroDamage {
     // constructor
     public Execute(final Hero hero) {
         super(hero);
+        // set initial race modifiers
         this.setPyromancerModif(KnightConstants.EXECUTE_PYROMANCER_MODIF);
         this.setKnightModif(KnightConstants.EXECUTE_KNIGHT_MODIF);
         this.setWizardModif(KnightConstants.EXECUTE_WIZARD_MODIF);
