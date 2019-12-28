@@ -8,17 +8,19 @@ import players.constants.RogueConstants;
 import players.factory.HeroTypes;
 import players.strategies.RogueAttackStrategy;
 import players.strategies.RogueDefenceStrategy;
+import specialcharacters.Observer;
 
 public class Rogue extends Hero {
     private RogueAttackStrategy attackStrategy;
     private RogueDefenceStrategy defenceStrategy;
 
     // constructor
-    public Rogue() {
-        super();
+    public Rogue(final Observer observer) {
+        super(observer);
 
         // set hero initial stats
         this.setType(HeroTypes.ROGUE);
+        this.setStringType("Rogue");
         this.setHP(RogueConstants.BASE_HP);
         this.setMaxHP(RogueConstants.BASE_HP);
         this.setDefaultHP(RogueConstants.BASE_HP);

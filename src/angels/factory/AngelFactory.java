@@ -11,6 +11,8 @@ import angels.types.SmallAngel;
 import angels.types.Spawner;
 import angels.types.TheDoomer;
 import angels.types.XPAngel;
+import common.Coords;
+import specialcharacters.Observer;
 
 public final class AngelFactory {
     private static AngelFactory instance = null;
@@ -27,28 +29,28 @@ public final class AngelFactory {
     }
 
     // main purpose of angel factory to create angels
-    public Angel createAngel(final String type) {
+    public Angel createAngel(final String type, final Coords coords, final Observer observer) {
         switch (type) {
             case "DamageAngel":
-                return new DamageAngel();
+                return new DamageAngel(coords, observer);
             case "DarkAngel":
-                return new DarkAngel();
+                return new DarkAngel(coords, observer);
             case "Dracula":
-                return new Dracula();
+                return new Dracula(coords, observer);
             case "GoodBoy":
-                return new GoodBoy();
+                return new GoodBoy(coords, observer);
             case "LevelUpAngel":
-                return new LevelUpAngel();
+                return new LevelUpAngel(coords, observer);
             case "LifeGiver":
-                return new LifeGiver();
+                return new LifeGiver(coords, observer);
             case "SmallAngel":
-                return new SmallAngel();
+                return new SmallAngel(coords, observer);
             case "Spawner":
-                return new Spawner();
+                return new Spawner(coords, observer);
             case "TheDoomer":
-                return new TheDoomer();
+                return new TheDoomer(coords, observer);
             case "XPAngel":
-                return new XPAngel();
+                return new XPAngel(coords, observer);
             default:
                 throw new IllegalArgumentException();
         }

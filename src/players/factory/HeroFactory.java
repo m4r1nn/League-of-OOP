@@ -5,6 +5,7 @@ import players.types.Knight;
 import players.types.Pyromancer;
 import players.types.Rogue;
 import players.types.Wizard;
+import specialcharacters.Observer;
 
 public final class HeroFactory {
     private static HeroFactory instance = null;
@@ -21,16 +22,16 @@ public final class HeroFactory {
     }
 
     // main purpose of hero factory to create heroes
-    public Hero createHero(final char type) {
+    public Hero createHero(final char type, final Observer observer) {
         switch (type) {
             case 'P':
-                return new Pyromancer();
+                return new Pyromancer(observer);
             case 'K':
-                return new Knight();
+                return new Knight(observer);
             case 'W':
-                return new Wizard();
+                return new Wizard(observer);
             case 'R':
-                return new Rogue();
+                return new Rogue(observer);
             default:
                 throw new IllegalArgumentException();
         }

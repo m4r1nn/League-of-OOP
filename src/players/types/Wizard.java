@@ -8,17 +8,19 @@ import players.constants.WizardConstants;
 import players.factory.HeroTypes;
 import players.strategies.WizardAttackStrategy;
 import players.strategies.WizardDefenceStrategy;
+import specialcharacters.Observer;
 
 public class Wizard extends Hero {
     private WizardAttackStrategy attackStrategy;
     private WizardDefenceStrategy defenceStrategy;
 
     // constructor
-    public Wizard() {
-        super();
+    public Wizard(final Observer observer) {
+        super(observer);
 
         // set hero initial stats
         this.setType(HeroTypes.WIZARD);
+        this.setStringType("Wizard");
         this.setHP(WizardConstants.BASE_HP);
         this.setMaxHP(WizardConstants.BASE_HP);
         this.setDefaultHP(WizardConstants.BASE_HP);

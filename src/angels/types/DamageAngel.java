@@ -2,17 +2,23 @@ package angels.types;
 
 import angels.constants.DamageAngelConstants;
 import angels.factory.AngelTypes;
+import common.Coords;
 import players.abilities.HeroDamage;
 import players.types.Knight;
 import players.types.Pyromancer;
 import players.types.Rogue;
 import players.types.Wizard;
+import specialcharacters.Observer;
 
 public class DamageAngel extends Angel {
 
     // constructor
-    public DamageAngel() {
+    public DamageAngel(final Coords coords, final Observer observer) {
+        super(coords);
         this.setType(AngelTypes.DAMAGE_ANGEL);
+        this.setStringType("DamageAngel");
+        this.addObserver(observer);
+        this.notifyObservers(null, null, this, "AngelSpawn");
     }
 
     // visitor pattern implementation
@@ -29,6 +35,8 @@ public class DamageAngel extends Angel {
                 + DamageAngelConstants.KNIGHT_MODIF);
         ability2.setKnightModif(ability2.getKnightModif()
                 + DamageAngelConstants.KNIGHT_MODIF);
+
+        this.notifyObservers(hero, null, this, "AngelHelp");
     }
 
     @Override
@@ -44,6 +52,8 @@ public class DamageAngel extends Angel {
                 + DamageAngelConstants.PYROMANCER_MODIF);
         ability2.setPyromancerModif(ability2.getPyromancerModif()
                 + DamageAngelConstants.PYROMANCER_MODIF);
+
+        this.notifyObservers(hero, null, this, "AngelHelp");
     }
 
     @Override
@@ -59,6 +69,8 @@ public class DamageAngel extends Angel {
                 + DamageAngelConstants.ROGUE_MODIF);
         ability2.setRogueModif(ability2.getRogueModif()
                 + DamageAngelConstants.ROGUE_MODIF);
+
+        this.notifyObservers(hero, null, this, "AngelHelp");
     }
 
     @Override
@@ -74,5 +86,7 @@ public class DamageAngel extends Angel {
                 + DamageAngelConstants.WIZARD_MODIF);
         ability2.setWizardModif(ability2.getWizardModif()
                 + DamageAngelConstants.WIZARD_MODIF);
+
+        this.notifyObservers(hero, null, this, "AngelHelp");
     }
 }

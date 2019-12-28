@@ -2,18 +2,24 @@ package angels.types;
 
 import angels.constants.LevelUpAngelConstants;
 import angels.factory.AngelTypes;
+import common.Coords;
 import players.abilities.HeroDamage;
 import players.constants.HeroConstants;
 import players.types.Knight;
 import players.types.Pyromancer;
 import players.types.Rogue;
 import players.types.Wizard;
+import specialcharacters.Observer;
 
 public class LevelUpAngel extends Angel {
 
     // constructor
-    public LevelUpAngel() {
+    public LevelUpAngel(final Coords coords, final Observer observer) {
+        super(coords);
         this.setType(AngelTypes.LEVEL_UP_ANGEL);
+        this.setStringType("LevelUpAngel");
+        this.addObserver(observer);
+        this.notifyObservers(null, null, this, "AngelSpawn");
     }
 
     // visitor pattern implementation
@@ -33,6 +39,9 @@ public class LevelUpAngel extends Angel {
                 + LevelUpAngelConstants.KNIGHT_MODIF);
         ability2.setKnightModif(ability2.getKnightModif()
                 + LevelUpAngelConstants.KNIGHT_MODIF);
+
+        this.notifyObservers(hero, null, this, "AngelHelp");
+        this.notifyObservers(hero, null, null, "HeroLevelUp");
     }
 
     @Override
@@ -51,6 +60,9 @@ public class LevelUpAngel extends Angel {
                 + LevelUpAngelConstants.PYROMANCER_MODIF);
         ability2.setPyromancerModif(ability2.getPyromancerModif()
                 + LevelUpAngelConstants.PYROMANCER_MODIF);
+
+        this.notifyObservers(hero, null, this, "AngelHelp");
+        this.notifyObservers(hero, null, null, "HeroLevelUp");
     }
 
     @Override
@@ -69,6 +81,9 @@ public class LevelUpAngel extends Angel {
                 + LevelUpAngelConstants.ROGUE_MODIF);
         ability2.setRogueModif(ability2.getRogueModif()
                 + LevelUpAngelConstants.ROGUE_MODIF);
+
+        this.notifyObservers(hero, null, this, "AngelHelp");
+        this.notifyObservers(hero, null, null, "HeroLevelUp");
     }
 
     @Override
@@ -87,5 +102,8 @@ public class LevelUpAngel extends Angel {
                 + LevelUpAngelConstants.WIZARD_MODIF);
         ability2.setWizardModif(ability2.getWizardModif()
                 + LevelUpAngelConstants.WIZARD_MODIF);
+
+        this.notifyObservers(hero, null, this, "AngelHelp");
+        this.notifyObservers(hero, null, null, "HeroLevelUp");
     }
 }

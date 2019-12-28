@@ -1,2 +1,5 @@
 Starting audit...
+[ERROR] /home/marin/work/oop/proiect/code/League-of-OOP/src/main/GameLogic.java:28:15: Parameter observer should be final. [FinalParameters]
+[ERROR] /home/marin/work/oop/proiect/code/League-of-OOP/src/main/GameInputLoader.java:29:45: Parameter observer should be final. [FinalParameters]
 Audit done.
+Checkstyle ends with 2 errors.

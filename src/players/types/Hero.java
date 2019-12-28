@@ -5,14 +5,18 @@ import players.abilities.HeroDamage;
 import players.constants.HeroConstants;
 import players.factory.HeroTypes;
 import players.strategies.Strategy;
+import specialcharacters.Observer;
+import specialcharacters.Subject;
 
-public abstract class Hero implements IHero {
+public abstract class Hero extends Subject implements IHero {
     private int hP;
     private int xP;
     private int level;
+    private int id;
 
     private Coords coords;
     private HeroTypes type;
+    private String stringType;
 
     private int defaultHP;
     private int maxHP;
@@ -32,9 +36,10 @@ public abstract class Hero implements IHero {
     private Strategy strategy;
 
     // constructor
-    public Hero() {
+    public Hero(final Observer observer) {
         this.xP = 0;
         this.level = 0;
+        this.addObserver(observer);
     }
 
     // replace old hp with new hp after hero's level grow
@@ -61,6 +66,7 @@ public abstract class Hero implements IHero {
 
         // restore hero max hp if it's level has grown
         if (hasGrown) {
+            this.notifyObservers(this, null, null, "HeroLevelUp");
             this.restoreHP();
         }
     }
@@ -192,6 +198,22 @@ public abstract class Hero implements IHero {
 
     public final int getXP() {
         return this.xP;
+    }
+
+    public final void setId(final int id) {
+        this.id = id;
+    }
+
+    public final int getId() {
+        return this.id;
+    }
+
+    public final void setStringType(final String stringType) {
+        this.stringType = stringType;
+    }
+
+    public final String getStringType() {
+        return this.stringType;
     }
 
     public final HeroTypes getType() {

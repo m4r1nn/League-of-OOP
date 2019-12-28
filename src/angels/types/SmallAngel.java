@@ -2,17 +2,23 @@ package angels.types;
 
 import angels.constants.SmallAngelConstants;
 import angels.factory.AngelTypes;
+import common.Coords;
 import players.abilities.HeroDamage;
 import players.types.Knight;
 import players.types.Pyromancer;
 import players.types.Rogue;
 import players.types.Wizard;
+import specialcharacters.Observer;
 
 public class SmallAngel extends Angel {
 
     // constructor
-    public SmallAngel() {
+    public SmallAngel(final Coords coords, final Observer observer) {
+        super(coords);
         this.setType(AngelTypes.SMALL_ANGEL);
+        this.setStringType("SmallAngel");
+        this.addObserver(observer);
+        this.notifyObservers(null, null, this, "AngelSpawn");
     }
 
     // visitor pattern implementation
@@ -33,6 +39,8 @@ public class SmallAngel extends Angel {
         if (hero.getHP() > hero.getMaxHP()) {
             hero.setHP(hero.getMaxHP());
         }
+
+        this.notifyObservers(hero, null, this, "AngelHelp");
     }
 
     @Override
@@ -52,6 +60,8 @@ public class SmallAngel extends Angel {
         if (hero.getHP() > hero.getMaxHP()) {
             hero.setHP(hero.getMaxHP());
         }
+
+        this.notifyObservers(hero, null, this, "AngelHelp");
     }
 
     @Override
@@ -71,6 +81,8 @@ public class SmallAngel extends Angel {
         if (hero.getHP() > hero.getMaxHP()) {
             hero.setHP(hero.getMaxHP());
         }
+
+        this.notifyObservers(hero, null, this, "AngelHelp");
     }
 
     @Override
@@ -90,5 +102,7 @@ public class SmallAngel extends Angel {
         if (hero.getHP() > hero.getMaxHP()) {
             hero.setHP(hero.getMaxHP());
         }
+
+        this.notifyObservers(hero, null, this, "AngelHelp");
     }
 }

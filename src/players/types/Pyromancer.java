@@ -8,17 +8,19 @@ import players.constants.PyromancerConstants;
 import players.factory.HeroTypes;
 import players.strategies.PyromancerAttackStrategy;
 import players.strategies.PyromancerDefenceStrategy;
+import specialcharacters.Observer;
 
 public class Pyromancer extends Hero {
     private PyromancerAttackStrategy attackStrategy;
     private PyromancerDefenceStrategy defenceStrategy;
 
     // constructor
-    public Pyromancer() {
-        super();
+    public Pyromancer(final Observer observer) {
+        super(observer);
 
         // set hero initial stats
         this.setType(HeroTypes.PYROMANCER);
+        this.setStringType("Pyromancer");
         this.setHP(PyromancerConstants.BASE_HP);
         this.setMaxHP(PyromancerConstants.BASE_HP);
         this.setDefaultHP(PyromancerConstants.BASE_HP);

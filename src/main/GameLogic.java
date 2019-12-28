@@ -1,29 +1,39 @@
 package main;
 
+import angels.factory.AngelFactory;
+import angels.types.Angel;
 import common.Coords;
 import players.factory.HeroTypes;
 import players.types.Hero;
+import specialcharacters.Observer;
+import specialcharacters.Subject;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.util.ArrayList;
 
-class GameLogic {
+class GameLogic extends Subject {
     // contains main implementation of the game
     private String outputPath;
     private ArrayList<Hero> players;
     private int roundsNumber;
     private ArrayList<String> commandLines;
     private ArrayList<String> angelsLines;
+    private AngelFactory angelFactory;
+    private Observer observer;
 
     // constructor
     GameLogic(final String outputPath, final ArrayList<Hero> players, final int roundsNumber,
-              final ArrayList<String> commandLines, final ArrayList<String> angelsLines) {
+              final ArrayList<String> commandLines, final ArrayList<String> angelsLines,
+              final Observer observer) {
         this.outputPath = outputPath;
         this.players = players;
         this.roundsNumber = roundsNumber;
         this.commandLines = commandLines;
         this.angelsLines = angelsLines;
+        this.angelFactory = AngelFactory.getInstance();
+        this.observer = observer;
+        this.addObserver(this.observer);
     }
 
     // takes char array as parameter and moves all players
@@ -116,6 +126,7 @@ class GameLogic {
 
         // check if a hero has won the battle (he is alive and the other isn't)
         if (hero1.getHP() > 0 && hero2.getHP() <= 0) {
+            this.notifyObservers(hero2, hero1, null, "HeroesFight");
             hero1.growXP(hero2.getLevel());
         } else if (hero1.getHP() <= 0 && hero2.getHP() > 0) {
             hero2.growXP(hero1.getLevel());
@@ -141,9 +152,18 @@ class GameLogic {
     }
 
     private void letAngelsCome(final int round) {
-        System.out.println(angelsLines.get(round));
         String[] args = angelsLines.get(round).split("\\s");
-        System.out.println(args[0]);
+        for (int i = 0; i < Integer.parseInt(args[0]); i++) {
+            String[] items = args[i + 1].split(",");
+            int lin = Integer.parseInt(items[1]);
+            int col = Integer.parseInt(items[2]);
+            Angel angel = angelFactory.createAngel(items[0], new Coords(lin, col), observer);
+            for (Hero hero : this.players) {
+                if (hero.getCoords().equals(angel.getCoords())) {
+                    hero.acceptAngel(angel);
+                }
+            }
+        }
     }
 
     // display the leader board
@@ -152,6 +172,8 @@ class GameLogic {
             // use buffered writer to parse output
             FileWriter fw = new FileWriter(this.outputPath);
             BufferedWriter bfw = new BufferedWriter(fw);
+
+            System.out.println("~~ Results ~~");
 
             // iterate and print heroes final stats
             for (Hero hero : players) {
@@ -170,9 +192,11 @@ class GameLogic {
     // main function of game logic
     final void runRounds() {
         String line;
+        String res;
 
         // go through rounds and do the interactions between heroes
         for (int i = 0; i < this.roundsNumber; i++) {
+            System.out.println("~~ Round " + (i + 1) + " ~~");
             line = commandLines.get(i);
             char[] directions = line.toCharArray();
             this.applyOvertimeDamage();
@@ -180,6 +204,7 @@ class GameLogic {
             this.movePlayers(directions);
             this.letHeroesFight();
             this.letAngelsCome(i);
+            System.out.println();
         }
 
         // print heroes

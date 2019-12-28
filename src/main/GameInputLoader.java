@@ -4,6 +4,7 @@ import common.Coords;
 import common.GameMap;
 import players.factory.HeroFactory;
 import players.types.Hero;
+import specialcharacters.Observer;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -22,14 +23,18 @@ public class GameInputLoader {
     private ArrayList<String> commandsLines;
     private ArrayList<String> angelsLines;
 
+    private Observer observer;
+
     // constructor
-    GameInputLoader(final String inputPath) {
+    GameInputLoader(final String inputPath, final Observer observer) {
         this.inputPath = inputPath;
         this.gameMap = GameMap.getInstance();
         this.players = new ArrayList<>();
         this.heroFactory = HeroFactory.getInstance();
         this.commandsLines = new ArrayList<>();
         this.angelsLines = new ArrayList<>();
+
+        this.observer = observer;
     }
 
     final void readData() {
@@ -60,9 +65,10 @@ public class GameInputLoader {
                 String[] playerData = line.split("\\s");
 
                 // use hero factory to create a player
-                Hero player = heroFactory.createHero(playerData[0].charAt(0));
+                Hero player = heroFactory.createHero(playerData[0].charAt(0), this.observer);
                 player.setCoords(new Coords(Integer.parseInt(playerData[1]),
                         Integer.parseInt(playerData[2])));
+                player.setId(i);
 
                 this.players.add(player);
             }

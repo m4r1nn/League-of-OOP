@@ -8,17 +8,19 @@ import players.constants.KnightConstants;
 import players.factory.HeroTypes;
 import players.strategies.KnightAttackStrategy;
 import players.strategies.KnightDefenceStrategy;
+import specialcharacters.Observer;
 
 public class Knight extends Hero {
     private KnightAttackStrategy attackStrategy;
     private KnightDefenceStrategy defenceStrategy;
 
     // constructor
-    public Knight() {
-        super();
+    public Knight(final Observer observer) {
+        super(observer);
 
         // set hero initial stats
         this.setType(HeroTypes.KNIGHT);
+        this.setStringType("Knight");
         this.setHP(KnightConstants.BASE_HP);
         this.setMaxHP(KnightConstants.BASE_HP);
         this.setDefaultHP(KnightConstants.BASE_HP);
