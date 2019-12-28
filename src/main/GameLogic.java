@@ -129,7 +129,11 @@ class GameLogic extends Subject {
             this.notifyObservers(hero2, hero1, null, "HeroesFight");
             hero1.growXP(hero2.getLevel());
         } else if (hero1.getHP() <= 0 && hero2.getHP() > 0) {
+            this.notifyObservers(hero1, hero2, null, "HeroesFight");
             hero2.growXP(hero1.getLevel());
+        } else if (hero1.getHP() <= 0 && hero2.getHP() <= 0) {
+            this.notifyObservers(hero2, hero1, null, "HeroesFight");
+            this.notifyObservers(hero1, hero2, null, "HeroesFight");
         }
     }
 
@@ -168,22 +172,26 @@ class GameLogic extends Subject {
 
     // display the leader board
     private void displayHeroes() {
+        // use buffered writer to parse output
+
+        System.out.println("~~ Results ~~");
+        this.observer.getRes().append("~~ Results ~~\n");
+
+        // iterate and print heroes final stats
+        for (Hero hero : players) {
+            System.out.println(hero.toString());
+            this.observer.getRes().append(hero.toString() + "\n");
+        }
+    }
+
+    private void printInFile() {
         try {
-            // use buffered writer to parse output
             FileWriter fw = new FileWriter(this.outputPath);
             BufferedWriter bfw = new BufferedWriter(fw);
-
-            System.out.println("~~ Results ~~");
-
-            // iterate and print heroes final stats
-            for (Hero hero : players) {
-                System.out.println(hero.toString());
-                bfw.write(hero.toString() + "\n");
-            }
+            bfw.write(this.observer.getRes().toString());
 
             bfw.close();
             fw.close();
-
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -197,17 +205,26 @@ class GameLogic extends Subject {
         // go through rounds and do the interactions between heroes
         for (int i = 0; i < this.roundsNumber; i++) {
             System.out.println("~~ Round " + (i + 1) + " ~~");
+            this.observer.getRes().append("~~ Round " + (i + 1) + " ~~\n");
+
             line = commandLines.get(i);
             char[] directions = line.toCharArray();
             this.applyOvertimeDamage();
             this.changePlayersStrategies();
             this.movePlayers(directions);
             this.letHeroesFight();
+//            for (Hero hero : this.players) {
+//                System.out.println(hero);
+//            }
             this.letAngelsCome(i);
+
             System.out.println();
+            this.observer.getRes().append("\n");
         }
 
         // print heroes
         this.displayHeroes();
+
+        this.printInFile();
     }
 }

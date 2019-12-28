@@ -1,6 +1,7 @@
 package angels.types;
 
 import angels.constants.DamageAngelConstants;
+import angels.constants.DraculaConstants;
 import angels.factory.AngelTypes;
 import common.Coords;
 import players.abilities.HeroDamage;
@@ -31,9 +32,19 @@ public class DamageAngel extends Angel {
         HeroDamage ability1 = hero.getAbility1();
         HeroDamage ability2 = hero.getAbility2();
 
-        ability1.setKnightModif(ability1.getKnightModif()
+        ability1.setPyromancerModif(ability1.getPyromancerModif()
+                + DamageAngelConstants.KNIGHT_MODIF);
+        ability2.setPyromancerModif(ability2.getPyromancerModif()
                 + DamageAngelConstants.KNIGHT_MODIF);
         ability2.setKnightModif(ability2.getKnightModif()
+                + DamageAngelConstants.KNIGHT_MODIF);
+        ability1.setWizardModif(ability1.getWizardModif()
+                + DamageAngelConstants.KNIGHT_MODIF);
+        ability2.setWizardModif(ability2.getWizardModif()
+                + DamageAngelConstants.KNIGHT_MODIF);
+        ability1.setRogueModif(ability1.getRogueModif()
+                + DamageAngelConstants.KNIGHT_MODIF);
+        ability2.setRogueModif(ability2.getRogueModif()
                 + DamageAngelConstants.KNIGHT_MODIF);
 
         this.notifyObservers(hero, null, this, "AngelHelp");
@@ -52,6 +63,18 @@ public class DamageAngel extends Angel {
                 + DamageAngelConstants.PYROMANCER_MODIF);
         ability2.setPyromancerModif(ability2.getPyromancerModif()
                 + DamageAngelConstants.PYROMANCER_MODIF);
+        ability1.setKnightModif(ability1.getKnightModif()
+                + DamageAngelConstants.PYROMANCER_MODIF);
+        ability2.setKnightModif(ability2.getKnightModif()
+                + DamageAngelConstants.PYROMANCER_MODIF);
+        ability1.setWizardModif(ability1.getWizardModif()
+                + DamageAngelConstants.PYROMANCER_MODIF);
+        ability2.setWizardModif(ability2.getWizardModif()
+                + DamageAngelConstants.PYROMANCER_MODIF);
+        ability1.setRogueModif(ability1.getRogueModif()
+                + DamageAngelConstants.PYROMANCER_MODIF);
+        ability2.setRogueModif(ability2.getRogueModif()
+                + DamageAngelConstants.PYROMANCER_MODIF);
 
         this.notifyObservers(hero, null, this, "AngelHelp");
     }
@@ -65,6 +88,18 @@ public class DamageAngel extends Angel {
         HeroDamage ability1 = hero.getAbility1();
         HeroDamage ability2 = hero.getAbility2();
 
+        ability1.setPyromancerModif(ability1.getPyromancerModif()
+                + DamageAngelConstants.ROGUE_MODIF);
+        ability2.setPyromancerModif(ability2.getPyromancerModif()
+                + DamageAngelConstants.ROGUE_MODIF);
+        ability1.setKnightModif(ability1.getKnightModif()
+                + DamageAngelConstants.ROGUE_MODIF);
+        ability2.setKnightModif(ability2.getKnightModif()
+                + DamageAngelConstants.ROGUE_MODIF);
+        ability1.setWizardModif(ability1.getWizardModif()
+                + DamageAngelConstants.ROGUE_MODIF);
+        ability2.setWizardModif(ability2.getWizardModif()
+                + DamageAngelConstants.ROGUE_MODIF);
         ability1.setRogueModif(ability1.getRogueModif()
                 + DamageAngelConstants.ROGUE_MODIF);
         ability2.setRogueModif(ability2.getRogueModif()
@@ -82,9 +117,21 @@ public class DamageAngel extends Angel {
         HeroDamage ability1 = hero.getAbility1();
         HeroDamage ability2 = hero.getAbility2();
 
+        ability1.setPyromancerModif(ability1.getPyromancerModif()
+                + DamageAngelConstants.WIZARD_MODIF);
+        ability2.setPyromancerModif(ability2.getPyromancerModif()
+                + DamageAngelConstants.WIZARD_MODIF);
+        ability1.setKnightModif(ability1.getKnightModif()
+                + DamageAngelConstants.WIZARD_MODIF);
+        ability2.setKnightModif(ability2.getKnightModif()
+                + DamageAngelConstants.WIZARD_MODIF);
         ability1.setWizardModif(ability1.getWizardModif()
                 + DamageAngelConstants.WIZARD_MODIF);
         ability2.setWizardModif(ability2.getWizardModif()
+                + DamageAngelConstants.WIZARD_MODIF);
+        ability1.setRogueModif(ability1.getRogueModif()
+                + DamageAngelConstants.WIZARD_MODIF);
+        ability2.setRogueModif(ability2.getRogueModif()
                 + DamageAngelConstants.WIZARD_MODIF);
 
         this.notifyObservers(hero, null, this, "AngelHelp");

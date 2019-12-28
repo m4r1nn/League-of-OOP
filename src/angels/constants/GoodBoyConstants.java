@@ -10,6 +10,6 @@ public final class GoodBoyConstants {
 
     public static final int KNIGHT_HP = 20;
     public static final int PYROMANCER_HP = 30;
-    public static final int ROGUE_HP = 45;
+    public static final int ROGUE_HP = 40;
     public static final int WIZARD_HP = 50;
 }

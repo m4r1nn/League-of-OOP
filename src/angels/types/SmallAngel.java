@@ -1,5 +1,6 @@
 package angels.types;
 
+import angels.constants.DraculaConstants;
 import angels.constants.SmallAngelConstants;
 import angels.factory.AngelTypes;
 import common.Coords;
@@ -31,10 +32,21 @@ public class SmallAngel extends Angel {
         HeroDamage ability1 = hero.getAbility1();
         HeroDamage ability2 = hero.getAbility2();
 
-        ability1.setKnightModif(ability1.getKnightModif()
+        ability1.setPyromancerModif(ability1.getPyromancerModif()
+                + SmallAngelConstants.KNIGHT_MODIF);
+        ability2.setPyromancerModif(ability2.getPyromancerModif()
                 + SmallAngelConstants.KNIGHT_MODIF);
         ability2.setKnightModif(ability2.getKnightModif()
                 + SmallAngelConstants.KNIGHT_MODIF);
+        ability1.setWizardModif(ability1.getWizardModif()
+                + SmallAngelConstants.KNIGHT_MODIF);
+        ability2.setWizardModif(ability2.getWizardModif()
+                + SmallAngelConstants.KNIGHT_MODIF);
+        ability1.setRogueModif(ability1.getRogueModif()
+                + SmallAngelConstants.KNIGHT_MODIF);
+        ability2.setRogueModif(ability2.getRogueModif()
+                + SmallAngelConstants.KNIGHT_MODIF);
+
         hero.setHP(hero.getHP() + SmallAngelConstants.KNIGHT_HP);
         if (hero.getHP() > hero.getMaxHP()) {
             hero.setHP(hero.getMaxHP());
@@ -56,6 +68,19 @@ public class SmallAngel extends Angel {
                 + SmallAngelConstants.PYROMANCER_MODIF);
         ability2.setPyromancerModif(ability2.getPyromancerModif()
                 + SmallAngelConstants.PYROMANCER_MODIF);
+        ability1.setKnightModif(ability1.getKnightModif()
+                + SmallAngelConstants.PYROMANCER_MODIF);
+        ability2.setKnightModif(ability2.getKnightModif()
+                + SmallAngelConstants.PYROMANCER_MODIF);
+        ability1.setWizardModif(ability1.getWizardModif()
+                + SmallAngelConstants.PYROMANCER_MODIF);
+        ability2.setWizardModif(ability2.getWizardModif()
+                + SmallAngelConstants.PYROMANCER_MODIF);
+        ability1.setRogueModif(ability1.getRogueModif()
+                + SmallAngelConstants.PYROMANCER_MODIF);
+        ability2.setRogueModif(ability2.getRogueModif()
+                + SmallAngelConstants.PYROMANCER_MODIF);
+
         hero.setHP(hero.getHP() + SmallAngelConstants.PYROMANCER_HP);
         if (hero.getHP() > hero.getMaxHP()) {
             hero.setHP(hero.getMaxHP());
@@ -73,10 +98,23 @@ public class SmallAngel extends Angel {
         HeroDamage ability1 = hero.getAbility1();
         HeroDamage ability2 = hero.getAbility2();
 
+        ability1.setPyromancerModif(ability1.getPyromancerModif()
+                + SmallAngelConstants.ROGUE_MODIF);
+        ability2.setPyromancerModif(ability2.getPyromancerModif()
+                + SmallAngelConstants.ROGUE_MODIF);
+        ability1.setKnightModif(ability1.getKnightModif()
+                + SmallAngelConstants.ROGUE_MODIF);
+        ability2.setKnightModif(ability2.getKnightModif()
+                + SmallAngelConstants.ROGUE_MODIF);
+        ability1.setWizardModif(ability1.getWizardModif()
+                + SmallAngelConstants.ROGUE_MODIF);
+        ability2.setWizardModif(ability2.getWizardModif()
+                + SmallAngelConstants.ROGUE_MODIF);
         ability1.setRogueModif(ability1.getRogueModif()
                 + SmallAngelConstants.ROGUE_MODIF);
         ability2.setRogueModif(ability2.getRogueModif()
                 + SmallAngelConstants.ROGUE_MODIF);
+
         hero.setHP(hero.getHP() + SmallAngelConstants.ROGUE_HP);
         if (hero.getHP() > hero.getMaxHP()) {
             hero.setHP(hero.getMaxHP());
@@ -94,10 +132,23 @@ public class SmallAngel extends Angel {
         HeroDamage ability1 = hero.getAbility1();
         HeroDamage ability2 = hero.getAbility2();
 
+        ability1.setPyromancerModif(ability1.getPyromancerModif()
+                + SmallAngelConstants.WIZARD_MODIF);
+        ability2.setPyromancerModif(ability2.getPyromancerModif()
+                + SmallAngelConstants.WIZARD_MODIF);
+        ability1.setKnightModif(ability1.getKnightModif()
+                + SmallAngelConstants.WIZARD_MODIF);
+        ability2.setKnightModif(ability2.getKnightModif()
+                + SmallAngelConstants.WIZARD_MODIF);
         ability1.setWizardModif(ability1.getWizardModif()
                 + SmallAngelConstants.WIZARD_MODIF);
         ability2.setWizardModif(ability2.getWizardModif()
                 + SmallAngelConstants.WIZARD_MODIF);
+        ability1.setRogueModif(ability1.getRogueModif()
+                + SmallAngelConstants.WIZARD_MODIF);
+        ability2.setRogueModif(ability2.getRogueModif()
+                + SmallAngelConstants.WIZARD_MODIF);
+
         hero.setHP(hero.getHP() + SmallAngelConstants.WIZARD_HP);
         if (hero.getHP() > hero.getMaxHP()) {
             hero.setHP(hero.getMaxHP());

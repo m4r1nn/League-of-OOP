@@ -1,2 +1,7 @@
 Starting audit...
+[ERROR] /home/marin/work/oop/proiect/code/League-of-OOP/src/angels/types/GoodBoy.java:3:8: Unused import - angels.constants.DraculaConstants. [UnusedImports]
+[ERROR] /home/marin/work/oop/proiect/code/League-of-OOP/src/angels/types/SmallAngel.java:3:8: Unused import - angels.constants.DraculaConstants. [UnusedImports]
+[ERROR] /home/marin/work/oop/proiect/code/League-of-OOP/src/angels/types/DamageAngel.java:4:8: Unused import - angels.constants.DraculaConstants. [UnusedImports]
+[ERROR] /home/marin/work/oop/proiect/code/League-of-OOP/src/angels/types/LevelUpAngel.java:3:8: Unused import - angels.constants.DraculaConstants. [UnusedImports]
 Audit done.
+Checkstyle ends with 4 errors.

@@ -32,17 +32,17 @@ public class XPAngel extends Angel {
         int xPLevelUp = HeroConstants.XP_LIMIT_TO_GROW + hero.getLevel()
                 * HeroConstants.XP_LIMIT_COEF;
 
+        this.notifyObservers(hero, null, this, "AngelHelp");
+
         boolean hasGrown = false;
         while (hero.getXP() >= xPLevelUp) {
             hero.setLevel(hero.getLevel() + 1);
             xPLevelUp += HeroConstants.XP_LIMIT_COEF;
             hasGrown = true;
+            this.notifyObservers(hero, null, null, "HeroLevelUp");
         }
 
-        this.notifyObservers(hero, null, this, "AngelHelp");
-
         if (hasGrown) {
-            this.notifyObservers(hero, null, null, "HeroLevelUp");
             hero.restoreHP();
         }
     }
@@ -57,17 +57,17 @@ public class XPAngel extends Angel {
         int xPLevelUp = HeroConstants.XP_LIMIT_TO_GROW + hero.getLevel()
                 * HeroConstants.XP_LIMIT_COEF;
 
+        this.notifyObservers(hero, null, this, "AngelHelp");
+
         boolean hasGrown = false;
         while (hero.getXP() >= xPLevelUp) {
             hero.setLevel(hero.getLevel() + 1);
             xPLevelUp += HeroConstants.XP_LIMIT_COEF;
             hasGrown = true;
+            this.notifyObservers(hero, null, null, "HeroLevelUp");
         }
 
-        this.notifyObservers(hero, null, this, "AngelHelp");
-
         if (hasGrown) {
-            this.notifyObservers(hero, null, null, "HeroLevelUp");
             hero.restoreHP();
         }
     }
@@ -82,17 +82,17 @@ public class XPAngel extends Angel {
         int xPLevelUp = HeroConstants.XP_LIMIT_TO_GROW + hero.getLevel()
                 * HeroConstants.XP_LIMIT_COEF;
 
+        this.notifyObservers(hero, null, this, "AngelHelp");
+
         boolean hasGrown = false;
         while (hero.getXP() >= xPLevelUp) {
             hero.setLevel(hero.getLevel() + 1);
             xPLevelUp += HeroConstants.XP_LIMIT_COEF;
             hasGrown = true;
+            this.notifyObservers(hero, null, null, "HeroLevelUp");
         }
 
-        this.notifyObservers(hero, null, this, "AngelHelp");
-
         if (hasGrown) {
-            this.notifyObservers(hero, null, null, "HeroLevelUp");
             hero.restoreHP();
         }
     }
@@ -107,17 +107,17 @@ public class XPAngel extends Angel {
         int xPLevelUp = HeroConstants.XP_LIMIT_TO_GROW + hero.getLevel()
                 * HeroConstants.XP_LIMIT_COEF;
 
+        this.notifyObservers(hero, null, this, "AngelHelp");
+
         boolean hasGrown = false;
         while (hero.getXP() >= xPLevelUp) {
             hero.setLevel(hero.getLevel() + 1);
             xPLevelUp += HeroConstants.XP_LIMIT_COEF;
             hasGrown = true;
+            this.notifyObservers(hero, null, null, "HeroLevelUp");
         }
 
-        this.notifyObservers(hero, null, this, "AngelHelp");
-
         if (hasGrown) {
-            this.notifyObservers(hero, null, null, "HeroLevelUp");
             hero.restoreHP();
         }
     }

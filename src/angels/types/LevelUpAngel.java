@@ -1,5 +1,6 @@
 package angels.types;
 
+import angels.constants.DraculaConstants;
 import angels.constants.LevelUpAngelConstants;
 import angels.factory.AngelTypes;
 import common.Coords;
@@ -31,13 +32,24 @@ public class LevelUpAngel extends Angel {
 
         hero.setXP(HeroConstants.XP_LIMIT_TO_GROW + hero.getLevel() * HeroConstants.XP_LIMIT_COEF);
         hero.setLevel(hero.getLevel() + 1);
+        hero.restoreHP();
 
         HeroDamage ability1 = hero.getAbility1();
         HeroDamage ability2 = hero.getAbility2();
 
-        ability1.setKnightModif(ability1.getKnightModif()
+        ability1.setPyromancerModif(ability1.getPyromancerModif()
+                + LevelUpAngelConstants.KNIGHT_MODIF);
+        ability2.setPyromancerModif(ability2.getPyromancerModif()
                 + LevelUpAngelConstants.KNIGHT_MODIF);
         ability2.setKnightModif(ability2.getKnightModif()
+                + LevelUpAngelConstants.KNIGHT_MODIF);
+        ability1.setWizardModif(ability1.getWizardModif()
+                + LevelUpAngelConstants.KNIGHT_MODIF);
+        ability2.setWizardModif(ability2.getWizardModif()
+                + LevelUpAngelConstants.KNIGHT_MODIF);
+        ability1.setRogueModif(ability1.getRogueModif()
+                + LevelUpAngelConstants.KNIGHT_MODIF);
+        ability2.setRogueModif(ability2.getRogueModif()
                 + LevelUpAngelConstants.KNIGHT_MODIF);
 
         this.notifyObservers(hero, null, this, "AngelHelp");
@@ -52,6 +64,7 @@ public class LevelUpAngel extends Angel {
 
         hero.setXP(HeroConstants.XP_LIMIT_TO_GROW + hero.getLevel() * HeroConstants.XP_LIMIT_COEF);
         hero.setLevel(hero.getLevel() + 1);
+        hero.restoreHP();
 
         HeroDamage ability1 = hero.getAbility1();
         HeroDamage ability2 = hero.getAbility2();
@@ -59,6 +72,18 @@ public class LevelUpAngel extends Angel {
         ability1.setPyromancerModif(ability1.getPyromancerModif()
                 + LevelUpAngelConstants.PYROMANCER_MODIF);
         ability2.setPyromancerModif(ability2.getPyromancerModif()
+                + LevelUpAngelConstants.PYROMANCER_MODIF);
+        ability1.setKnightModif(ability1.getKnightModif()
+                + LevelUpAngelConstants.PYROMANCER_MODIF);
+        ability2.setKnightModif(ability2.getKnightModif()
+                + LevelUpAngelConstants.PYROMANCER_MODIF);
+        ability1.setWizardModif(ability1.getWizardModif()
+                + LevelUpAngelConstants.PYROMANCER_MODIF);
+        ability2.setWizardModif(ability2.getWizardModif()
+                + LevelUpAngelConstants.PYROMANCER_MODIF);
+        ability1.setRogueModif(ability1.getRogueModif()
+                + LevelUpAngelConstants.PYROMANCER_MODIF);
+        ability2.setRogueModif(ability2.getRogueModif()
                 + LevelUpAngelConstants.PYROMANCER_MODIF);
 
         this.notifyObservers(hero, null, this, "AngelHelp");
@@ -73,10 +98,23 @@ public class LevelUpAngel extends Angel {
 
         hero.setXP(HeroConstants.XP_LIMIT_TO_GROW + hero.getLevel() * HeroConstants.XP_LIMIT_COEF);
         hero.setLevel(hero.getLevel() + 1);
+        hero.restoreHP();
 
         HeroDamage ability1 = hero.getAbility1();
         HeroDamage ability2 = hero.getAbility2();
 
+        ability1.setPyromancerModif(ability1.getPyromancerModif()
+                + LevelUpAngelConstants.ROGUE_MODIF);
+        ability2.setPyromancerModif(ability2.getPyromancerModif()
+                + LevelUpAngelConstants.ROGUE_MODIF);
+        ability1.setKnightModif(ability1.getKnightModif()
+                + LevelUpAngelConstants.ROGUE_MODIF);
+        ability2.setKnightModif(ability2.getKnightModif()
+                + LevelUpAngelConstants.ROGUE_MODIF);
+        ability1.setWizardModif(ability1.getWizardModif()
+                + LevelUpAngelConstants.ROGUE_MODIF);
+        ability2.setWizardModif(ability2.getWizardModif()
+                + LevelUpAngelConstants.ROGUE_MODIF);
         ability1.setRogueModif(ability1.getRogueModif()
                 + LevelUpAngelConstants.ROGUE_MODIF);
         ability2.setRogueModif(ability2.getRogueModif()
@@ -94,13 +132,26 @@ public class LevelUpAngel extends Angel {
 
         hero.setXP(HeroConstants.XP_LIMIT_TO_GROW + hero.getLevel() * HeroConstants.XP_LIMIT_COEF);
         hero.setLevel(hero.getLevel() + 1);
+        hero.restoreHP();
 
         HeroDamage ability1 = hero.getAbility1();
         HeroDamage ability2 = hero.getAbility2();
 
+        ability1.setPyromancerModif(ability1.getPyromancerModif()
+                + LevelUpAngelConstants.WIZARD_MODIF);
+        ability2.setPyromancerModif(ability2.getPyromancerModif()
+                + LevelUpAngelConstants.WIZARD_MODIF);
+        ability1.setKnightModif(ability1.getKnightModif()
+                + LevelUpAngelConstants.WIZARD_MODIF);
+        ability2.setKnightModif(ability2.getKnightModif()
+                + LevelUpAngelConstants.WIZARD_MODIF);
         ability1.setWizardModif(ability1.getWizardModif()
                 + LevelUpAngelConstants.WIZARD_MODIF);
         ability2.setWizardModif(ability2.getWizardModif()
+                + LevelUpAngelConstants.WIZARD_MODIF);
+        ability1.setRogueModif(ability1.getRogueModif()
+                + LevelUpAngelConstants.WIZARD_MODIF);
+        ability2.setRogueModif(ability2.getRogueModif()
                 + LevelUpAngelConstants.WIZARD_MODIF);
 
         this.notifyObservers(hero, null, this, "AngelHelp");

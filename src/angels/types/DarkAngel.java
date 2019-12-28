@@ -28,8 +28,11 @@ public class DarkAngel extends Angel {
         }
 
         hero.setHP(hero.getHP() + DarkAngelConstants.KNIGHT_HP);
-
         this.notifyObservers(hero, null, this, "AngelHit");
+
+        if (hero.getHP() <= 0) {
+            this.notifyObservers(hero, null, null, "HeroKilled");
+        }
     }
 
     @Override
@@ -39,8 +42,11 @@ public class DarkAngel extends Angel {
         }
 
         hero.setHP(hero.getHP() + DarkAngelConstants.PYROMANCER_HP);
-
         this.notifyObservers(hero, null, this, "AngelHit");
+
+        if (hero.getHP() <= 0) {
+            this.notifyObservers(hero, null, null, "HeroKilled");
+        }
     }
 
     @Override
@@ -50,8 +56,11 @@ public class DarkAngel extends Angel {
         }
 
         hero.setHP(hero.getHP() + DarkAngelConstants.ROGUE_HP);
-
         this.notifyObservers(hero, null, this, "AngelHit");
+
+        if (hero.getHP() <= 0) {
+            this.notifyObservers(hero, null, null, "HeroKilled");
+        }
     }
 
     @Override
@@ -61,7 +70,10 @@ public class DarkAngel extends Angel {
         }
 
         hero.setHP(hero.getHP() + DarkAngelConstants.WIZARD_HP);
-
         this.notifyObservers(hero, null, this, "AngelHit");
+
+        if (hero.getHP() <= 0) {
+            this.notifyObservers(hero, null, null, "HeroKilled");
+        }
     }
 }

@@ -62,11 +62,11 @@ public abstract class Hero extends Subject implements IHero {
             this.level++;
             xPLevelUp += HeroConstants.XP_LIMIT_COEF;
             hasGrown = true;
+            this.notifyObservers(this, null, null, "HeroLevelUp");
         }
 
         // restore hero max hp if it's level has grown
         if (hasGrown) {
-            this.notifyObservers(this, null, null, "HeroLevelUp");
             this.restoreHP();
         }
     }
