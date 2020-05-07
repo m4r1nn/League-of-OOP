@@ -1,4 +1,4 @@
-# League-of-OOP --- Burcea Marian Gabriel 324CA
+# League-of-OOP --- Burcea Marian Gabriel
 
 **SHORT DESCRIPTION of GAME**\
 	League of OOP is a mini-project that tries to implement a virtual
